@@ -31,7 +31,7 @@
 
 ---
 
-## Sprint 1 — Modelo de Dados no Power BI 🔄
+## Sprint 1 — Modelo de Dados no Power BI 🔄 ← EM ANDAMENTO
 
 **Objetivo:** Importar todos os CSVs, validar relacionamentos e confirmar que os dados estão corretos antes de escrever qualquer medida.
 
@@ -49,7 +49,13 @@
 - [ ] Verificação numérica: soma de `fato_gastos_mensais[valor_total]` = R$8.028
 - [ ] Criar os 3 parâmetros What-If (conforme seção 1 de `dax/medidas_completas.md`)
 
+**Hotfix aplicado (224f55c):**
+- `dim_tributos.csv` e `fato_renda_familia.csv` corrigidos — campos `observacao` com vírgulas agora entre aspas
+- `dax/power_query_M_corrigido.md` gerado com código M ajustado (UTF-8 + QuoteStyle + type number)
+- ⚠️ Pendente: substituir código M no Power Query Editor para as duas tabelas afetadas
+
 **Entregáveis:**
+- `Report_Mapa_Impostos_Brasil.pbix` salvo na pasta do projeto ✅
 - Print/screenshot da View de Modelo mostrando os relacionamentos
 - Parâmetros What-If funcionando (sliders aparecem no canvas)
 
@@ -307,8 +313,8 @@ npm run build        # gerar dist/mapaImpostosSankey.pbiviz
 
 | Sprint | Status | Data início | Data fim | Commit |
 |--------|--------|-------------|----------|--------|
-| 0 — Fundação | 🔄 | 2026-05-01 | — | — |
-| 1 — Dados | ⬜ | — | — | — |
+| 0 — Fundação | ✅ | 2026-05-01 | 2026-05-01 | 43014e9 |
+| 1 — Dados | 🔄 | 2026-05-01 | — | — |
 | 2 — DAX Renda | ⬜ | — | — | — |
 | 3 — DAX Consumo | ⬜ | — | — | — |
 | 4 — Fluxo Sankey | ⬜ | — | — | — |

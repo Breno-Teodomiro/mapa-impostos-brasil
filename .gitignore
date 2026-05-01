@@ -3,8 +3,8 @@ visual_sankey/node_modules/
 visual_sankey/.tmp/
 visual_sankey/dist/
 
-# Power BI binaries (grandes demais para git)
-*.pbix
+# Power BI binaries — rastrear apenas o arquivo principal do projeto
+# *.pbix  ← desativado: arquivo é pequeno (~89KB) e útil para backup/compartilhar
 
 # Artifacts compilados — commit apenas o fonte
 visual_sankey/assets/icon.png
