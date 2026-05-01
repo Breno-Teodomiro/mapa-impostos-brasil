@@ -31,7 +31,7 @@
 
 ---
 
-## Sprint 1 — Modelo de Dados no Power BI 🔄 ← EM ANDAMENTO
+## Sprint 1 — Modelo de Dados no Power BI ✅
 
 **Objetivo:** Importar todos os CSVs, validar relacionamentos e confirmar que os dados estão corretos antes de escrever qualquer medida.
 
@@ -314,8 +314,8 @@ npm run build        # gerar dist/mapaImpostosSankey.pbiviz
 | Sprint | Status | Data início | Data fim | Commit |
 |--------|--------|-------------|----------|--------|
 | 0 — Fundação | ✅ | 2026-05-01 | 2026-05-01 | 43014e9 |
-| 1 — Dados | 🔄 | 2026-05-01 | — | — |
-| 2 — DAX Renda | ⬜ | — | — | — |
+| 1 — Dados | ✅ | 2026-05-01 | 2026-05-01 | — |
+| 2 — DAX Renda | 🔄 | 2026-05-01 | — | — |
 | 3 — DAX Consumo | ⬜ | — | — | — |
 | 4 — Fluxo Sankey | ⬜ | — | — | — |
 | 5 — Build Visual | ⬜ | — | — | — |
