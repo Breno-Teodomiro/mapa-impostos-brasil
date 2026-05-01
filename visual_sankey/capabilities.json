@@ -1,0 +1,99 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Fonte",
+      "name": "fonte",
+      "kind": "Grouping",
+      "description": "Nome do nó de origem (ex: 'Renda Bruta', 'Alimentação')"
+    },
+    {
+      "displayName": "Destino",
+      "name": "destino",
+      "kind": "Grouping",
+      "description": "Nome do nó de destino (ex: 'INSS', 'Imposto Embutido Alim.')"
+    },
+    {
+      "displayName": "Valor (R$)",
+      "name": "valor",
+      "kind": "Measure",
+      "description": "Valor do fluxo em reais"
+    },
+    {
+      "displayName": "Tipo",
+      "name": "tipo",
+      "kind": "Grouping",
+      "description": "Direto | Indireto | Patrimonial | Gasto | Renda"
+    },
+    {
+      "displayName": "Esfera",
+      "name": "esfera",
+      "kind": "Grouping",
+      "description": "Federal | Estadual | Municipal | Mix | N/A"
+    }
+  ],
+  "dataViewMappings": [
+    {
+      "table": {
+        "rows": {
+          "select": [
+            { "for": { "in": "fonte"    } },
+            { "for": { "in": "destino"  } },
+            { "for": { "in": "valor"    } },
+            { "for": { "in": "tipo"     } },
+            { "for": { "in": "esfera"   } }
+          ],
+          "dataReductionAlgorithm": {
+            "window": { "count": 500 }
+          }
+        }
+      }
+    }
+  ],
+  "objects": {
+    "cores": {
+      "displayName": "Cores por Tipo",
+      "properties": {
+        "corDireto": {
+          "displayName": "Imposto Direto",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "corIndireto": {
+          "displayName": "Imposto Indireto",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "corPatrimonial": {
+          "displayName": "Imposto Patrimonial",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "corGasto": {
+          "displayName": "Gasto / Consumo",
+          "type": { "fill": { "solid": { "color": true } } }
+        },
+        "corRenda": {
+          "displayName": "Renda",
+          "type": { "fill": { "solid": { "color": true } } }
+        }
+      }
+    },
+    "visual": {
+      "displayName": "Visual",
+      "properties": {
+        "mostrarValores": {
+          "displayName": "Mostrar valores nos nós",
+          "type": { "bool": true }
+        },
+        "mostrarPercentual": {
+          "displayName": "Mostrar % da renda bruta",
+          "type": { "bool": true }
+        },
+        "fundoEscuro": {
+          "displayName": "Fundo escuro",
+          "type": { "bool": true }
+        }
+      }
+    }
+  },
+  "supportsHighlight": false,
+  "supportsSorting": false,
+  "privileges": []
+}

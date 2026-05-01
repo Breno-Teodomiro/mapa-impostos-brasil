@@ -1,0 +1,18 @@
+# Node / pbiviz
+visual_sankey/node_modules/
+visual_sankey/.tmp/
+visual_sankey/dist/
+
+# Power BI binaries (grandes demais para git)
+*.pbix
+
+# Artifacts compilados — commit apenas o fonte
+visual_sankey/assets/icon.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

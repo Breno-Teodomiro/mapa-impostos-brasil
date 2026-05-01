@@ -1,0 +1,7 @@
+id,etapa,ordem,descricao_resumida,tributos_tipicos,pct_tipico_do_preco_final,exemplo_concreto
+1,Matéria-Prima / Importação,1,"Extração natural ou importação de insumos básicos","II;IPI importação;PIS importação;COFINS importação;INSS_Patronal",5,"Importador paga II + PIS/COFINS + IPI na entrada — todo já embutido no custo do insumo"
+2,Indústria / Fabricação,2,"Transformação dos insumos em produto acabado","IPI;ICMS;PIS;COFINS;INSS_Patronal;FGTS;IRPJ;CSLL",35,"Fábrica paga IPI na saída + ICMS + 28% de folha patronal/FGTS + IRPJ/CSLL sobre lucro — tudo no preço"
+3,Distribuição / Atacado,3,"Transporte e armazenagem em nível nacional/regional","ICMS interestadual;PIS;COFINS;ICMS combustível frete;IPVA frotas;INSS_Patronal",20,"Distribuidor paga ICMS na compra/venda + ICMS do diesel da frota + IPVA dos caminhões — repassado ao varejista"
+4,Varejo / Comércio,4,"Venda direta ao consumidor final","ICMS;PIS;COFINS;ISS;IPTU loja;INSS_Patronal;IRPJ;CSLL",25,"Varejista paga ICMS por dentro (17-28%) + IPTU do ponto comercial + folha patronal — tudo no preço final"
+5,Logística Transversal,5,"Custos de frete presentes em todas as etapas anteriores","ICMS combustível;CIDE;IPVA;Pedágio (concessão pública)",10,"Cada elo da cadeia paga combustível tributado a 43% + IPVA da frota + pedágio — repassado em cadeia"
+6,Consumidor Final,6,"Tributos diretos sobre a renda usada para consumir","INSS empregado;IRPF;IPVA pessoal;IPTU pessoal;Licenciamento",5,"Após suportar todos os impostos embutidos no preço, o consumidor ainda paga INSS + IR sobre a renda que usou"

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "strict": false,
+    "noImplicitAny": false,
+    "lib": ["ES6", "DOM"],
+    "outDir": ".tmp/drop",
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", ".tmp"]
+}

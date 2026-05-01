@@ -1,0 +1,21 @@
+id,nome,sigla,tipo,esfera,aliquota_nominal,incide_sobre,observacao
+1,Imposto de Renda Pessoa Física,IRPF,Direto,Federal,27.5,Renda,Progressivo — tabela 2024 mensal
+2,Contribuição Previdenciária Empregado,INSS,Direto,Federal,14.0,Renda,Progressivo — tabela 2024 mensal (cap R$7.786,02)
+3,Imposto sobre Circulação de Mercadorias e Serviços,ICMS,Indireto,Estadual,17.0,Consumo Geral,Por dentro — alíquota Piauí (combustível: 28%)
+4,Imposto sobre Produtos Industrializados,IPI,Indireto,Federal,10.0,Produtos Industrializados,Varia por NCM — média estimada
+5,Programa de Integração Social,PIS,Indireto,Federal,0.65,Consumo,Regime cumulativo (simples) — 1.65% não-cumulativo
+6,Contribuição Financiamento Seguridade Social,COFINS,Indireto,Federal,3.0,Consumo,Regime cumulativo — 7.6% não-cumulativo
+7,Imposto sobre Serviços,ISS,Indireto,Municipal,5.0,Serviços,Máximo permitido — Teresina
+8,Contribuição Social sobre Lucro Líquido,CSLL,Indireto,Federal,9.0,Lucro Empresarial,Embutida no preço final ao consumidor
+9,Imposto de Renda Pessoa Jurídica,IRPJ,Indireto,Federal,15.0,Lucro Empresarial,Embutido no preço final — adicional de 10% acima de R$240k/ano
+10,Imposto sobre Propriedade de Veículos Automotores,IPVA,Patrimonial,Estadual,2.0,Patrimônio,Alíquota Piauí — rateio mensal
+11,Imposto sobre Propriedade Predial e Territorial Urbana,IPTU,Patrimonial,Municipal,0.5,Patrimônio,Alíquota média Teresina — rateio mensal
+12,INSS Patronal,INSS_Patronal,Indireto,Federal,20.0,Folha de Pagamento,Embutido no custo operacional das empresas
+13,Fundo de Garantia do Tempo de Serviço,FGTS,Indireto,Federal,8.0,Folha de Pagamento,Custo adicional do empregador embutido no preço
+14,Contribuição de Intervenção Domínio Econômico — Comb.,CIDE,Indireto,Federal,10.0,Combustíveis,R$0,5256/L gasolina + R$0,1309/L etanol (2024)
+15,Licenciamento de Veículo,Licenciamento,Patrimonial,Estadual,0.0,Patrimônio,Valor fixo anual — rateio mensal (R$20)
+16,Contribuição de Iluminação Pública,CIP,Indireto,Municipal,2.0,Energia Elétrica,Cobrada na fatura de energia elétrica
+17,Fundo de Universalização Serviços Telecomunicações,FUST,Indireto,Federal,1.0,Telecom,Embutido nas faturas de telecom
+18,Fundo para Desenvolvimento Telecomunicações,FUNTTEL,Indireto,Federal,0.5,Telecom,Embutido nas faturas de telecom
+19,Imposto sobre Operações Financeiras,IOF,Indireto,Federal,3.0,Operações Financeiras,Crédito — embutido em financiamentos e seguros
+20,Imposto de Importação — média,II,Indireto,Federal,20.0,Produtos Importados,Média estimada — varia por NCM/produto

@@ -1,0 +1,4 @@
+id_membro,membro,salario_bruto,inss_f1_ate_1412,inss_f2_1412_2667,inss_f3_2667_4000,inss_f4_4000_7786,inss_total,inss_aliq_efetiva_pct,irpf_base_calculo,irpf_deducao_dependentes,irpf_valor,irpf_aliq_efetiva_pct,renda_liquida,num_dependentes_declarados,observacao
+1,Marido,7280.00,105.90,112.92,160.00,459.20,838.02,11.51,6252.39,189.59,823.41,11.31,5618.57,1,"Marido declara 1 dependente (filho). IRPF: R$6.252,39 × 27,5% − R$896 = R$823,41"
+2,Esposa,2350.00,105.90,84.42,0.00,0.00,190.32,8.10,2159.68,0.00,0.00,0.00,2159.68,0,"Esposa: base IRPF = R$2.159,68 — abaixo do limite de isenção (R$2.259,20). Isenta."
+3,FAMÍLIA TOTAL,9630.00,211.80,197.34,160.00,459.20,1028.34,10.68,0.00,189.59,823.41,8.55,7778.25,1,"Carga direta total: R$1.851,75 = 19,23% da renda bruta familiar"
