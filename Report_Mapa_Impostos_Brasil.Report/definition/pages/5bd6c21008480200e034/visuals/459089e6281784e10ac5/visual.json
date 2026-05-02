@@ -3,9 +3,9 @@
   "name": "459089e6281784e10ac5",
   "position": {
     "x": 0,
-    "y": 570,
+    "y": 328.15988973121983,
     "z": 5007,
-    "height": 150,
+    "height": 392.55685733976571,
     "width": 1280,
     "tabOrder": 5007
   },
@@ -33,21 +33,6 @@
         }
       },
       "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "fato_gastos_mensais"
-                  }
-                },
-                "Property": "HTML_Sankey_Hero"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
         "isDefaultSort": true
       }
     },
