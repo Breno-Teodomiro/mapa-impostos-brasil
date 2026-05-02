@@ -1,0 +1,237 @@
+table fato_gastos_mensais
+	lineageTag: 2baced81-7d49-4fe8-970a-00fdbba94aae
+
+	measure Total_Gastos_Mensais = SUM(fato_gastos_mensais[valor_total])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: 7824690b-5644-4c17-b3ed-6d2b52a702a9
+
+	measure Total_Imposto_Indireto_Embutido = SUM(fato_gastos_mensais[imposto_embutido])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: 96a67a84-0a61-4469-a0c2-53223dae9cc0
+
+	measure Total_Custo_Real = SUM(fato_gastos_mensais[custo_real])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: 4a847fcd-1ec2-4436-b8d7-f3d87021bedc
+
+	measure Aliq_Indireta_Efetiva_Pct = DIVIDE([Total_Imposto_Indireto_Embutido], [Total_Gastos_Mensais], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Gastos
+		lineageTag: c0a9b65e-8d36-4153-acad-eb315ca305ba
+
+	measure Imposto_Indireto_Federal = SUM(fato_gastos_mensais[imp_federal])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: 8abc4fc1-363a-4c15-90b9-13acda61a707
+
+	measure Imposto_Indireto_Estadual = SUM(fato_gastos_mensais[imp_estadual])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: 5e0e8a53-c5bc-493d-b84e-d66133dc55cb
+
+	measure Imposto_Indireto_Municipal = SUM(fato_gastos_mensais[imp_municipal])
+		formatString: R$ #,##0.00
+		displayFolder: Gastos
+		lineageTag: fcb3c80b-1b47-4a28-b82d-8a2c0b111d92
+
+	measure Imposto_Patrimonial_IPVA = 250
+		formatString: R$ #,##0.00
+		displayFolder: Patrimonial
+		lineageTag: 4bb6b2fd-d1ef-45db-9f80-c7c1d86bbdce
+
+	measure Imposto_Patrimonial_IPTU = 100
+		formatString: R$ #,##0.00
+		displayFolder: Patrimonial
+		lineageTag: 99b6dde7-9de9-4453-b2a3-1d62e52dfe0f
+
+	measure Imposto_Patrimonial_Licenciamento = 20
+		formatString: R$ #,##0.00
+		displayFolder: Patrimonial
+		lineageTag: 7c6d50a8-c150-4ab8-a791-470e2d2257f6
+
+	measure Total_Patrimonial = [Imposto_Patrimonial_IPVA] + [Imposto_Patrimonial_IPTU] + [Imposto_Patrimonial_Licenciamento]
+		formatString: R$ #,##0.00
+		displayFolder: Patrimonial
+		lineageTag: a818530c-29ef-48ec-bedd-0d88e8ed9008
+
+	measure Carga_Total_Tributos = [Tributacao_Direta_Total] + [Total_Imposto_Indireto_Embutido] + [Total_Patrimonial]
+		formatString: R$ #,##0.00
+		displayFolder: Carga Total
+		lineageTag: dc24d0ce-e2c9-4617-838b-79a9e361a275
+
+	measure Carga_Efetiva_Sobre_Renda_Bruta_Pct = DIVIDE([Carga_Total_Tributos], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Carga Total
+		lineageTag: 9f858c30-e912-4494-8989-25ef843d060a
+
+	measure Pct_Carga_Direta = DIVIDE([Tributacao_Direta_Total], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Carga Total
+		lineageTag: 8e61be66-9251-4557-b55a-0af31472c877
+
+	measure Pct_Carga_Indireta = DIVIDE([Total_Imposto_Indireto_Embutido], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Carga Total
+		lineageTag: 42e8150b-8b8c-4e00-be4a-ebba09b37f87
+
+	measure Pct_Carga_Patrimon = DIVIDE([Total_Patrimonial], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Carga Total
+		lineageTag: 492fe047-0a27-4251-b85e-a7d4601eac0a
+
+	measure Resultado_Final = [Renda_Liquida_Total] - [Total_Gastos_Mensais] - [Total_Patrimonial]
+		formatString: R$ #,##0.00
+		displayFolder: Resultado
+		lineageTag: 5514a437-7290-4fcc-8e58-707c1e8d8272
+
+	measure Comprometimento_Renda_Liquida_Pct = DIVIDE([Total_Gastos_Mensais] + [Total_Patrimonial], [Renda_Liquida_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Resultado
+		lineageTag: c20fe430-4708-438a-88c6-574d4e40b037
+
+	measure Margem_Poupanca_Pct = DIVIDE([Resultado_Final], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Resultado
+		lineageTag: 4ddb083a-383c-403e-aed2-0489b00b79dd
+
+	measure HTML_Ticker_Hero = "<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}body{background:#0f0f1a;overflow:hidden;height:100%;display:flex;align-items:center}.tw{width:100%;overflow:hidden;background:rgba(231,76,60,0.10);border-top:1px solid rgba(231,76,60,0.45);padding:14px 0}.t{display:inline-block;white-space:nowrap;animation:tick 55s linear infinite}.t span{color:rgba(255,255,255,.82);font-size:13px;font-weight:500;padding:0 56px}.l{color:#e74c3c;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:1.5px;margin-right:6px}@keyframes tick{0%{transform:translateX(90vw)}100%{transform:translateX(-100%)}}</style><div class='tw'><div class='t'><span><span class='l'>Carga Total</span>" & FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct], "0.0") & "% da renda bruta</span><span><span class='l'>Impostos/mes</span>R$ " & FORMAT([Carga_Total_Tributos], "#,##0") & "</span><span><span class='l'>Deficit</span>-R$ " & FORMAT(ABS([Resultado_Final]), "#,##0") & " todo mes</span><span><span class='l'>Posicao</span>Top 10% do Brasil - ainda no vermelho</span><span><span class='l'>Cascata</span>ICMS incide sobre preco que ja inclui PIS COFINS e IPI</span><span><span class='l'>Combustivel</span>43% do preco bomba e imposto</span><span><span class='l'>Energia</span>44% da conta de luz e tributo</span><span><span class='l'>Invisiveis</span>R$ 2.215/mes em impostos embutidos nas compras</span></div></div>"
+		displayFolder: HTML Visuals
+		lineageTag: a1b2c3d4-e5f6-7890-abcd-ef1234567801
+
+	measure HTML_KPIs_Hero = "<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}body{background:transparent;height:100%;overflow:hidden}.wrap{display:flex;gap:14px;padding:12px;height:100%;align-items:stretch}.c{flex:1;background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:18px 22px;display:flex;flex-direction:column;justify-content:space-between;transition:all .25s;cursor:default}.c:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.15);transform:translateY(-3px)}.ico{font-size:22px;margin-bottom:2px}.lbl{color:rgba(255,255,255,.4);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px}.val{font-size:36px;font-weight:800;letter-spacing:-1.5px;line-height:1.05}.sub{color:rgba(255,255,255,.28);font-size:11px;margin-top:4px}.r{color:#e74c3c}.o{color:#e67e22}.b{color:#3498db}.pulse{animation:p 2.5s ease-in-out infinite}@keyframes p{0%,100%{opacity:1}50%{opacity:.5}}</style><div class='wrap'><div class='c'><div class='ico'>Carga</div><div class='lbl'>Carga Tributaria Efetiva</div><div class='val r pulse'>" & FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct], "0.0") & "%</div><div class='sub'>sobre a renda bruta familiar</div></div><div class='c'><div class='ico'>Impostos</div><div class='lbl'>Total de Impostos/mes</div><div class='val o'>R$ " & FORMAT([Carga_Total_Tributos], "#,##0") & "</div><div class='sub'>diretos + indiretos + patrimoniais</div></div><div class='c'><div class='ico'>Deficit</div><div class='lbl'>Resultado Mensal</div><div class='val r'>-R$ " & FORMAT(ABS([Resultado_Final]), "#,##0") & "</div><div class='sub'>deficit mesmo no Top 10% da renda</div></div><div class='c'><div class='ico'>Posicao</div><div class='lbl'>Posicao no Brasil</div><div class='val b'>" & [Percentil_Brasil_Estimado] & "</div><div class='sub'>em renda - ainda no vermelho</div></div></div>"
+		displayFolder: HTML Visuals
+		lineageTag: b2c3d4e5-f6a7-8901-bcde-f12345678902
+
+	measure HTML_Sankey_Hero =
+			VAR _L = CONCATENATEX(Fluxo_Sankey, "{""s"":""" & Fluxo_Sankey[fonte] & """,""t"":""" & Fluxo_Sankey[destino] & """,""v"":" & SUBSTITUTE(FORMAT(Fluxo_Sankey[valor],"0.00"),",",".") & ",""tp"":""" & Fluxo_Sankey[tipo] & """}",",")
+			VAR _h1 = "<!DOCTYPE html><html><head><meta charset='UTF-8'><script src='https://d3js.org/d3.v7.min.js'></script><script src='https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js'></script><style>*{margin:0;padding:0;box-sizing:border-box}body{background:transparent;font-family:Inter,system-ui,sans-serif;overflow:hidden}#c{width:100%;height:100vh}text{fill:rgba(255,255,255,.72);font-size:10.5px;font-weight:500}.lk{fill:none;opacity:.32;transition:opacity .2s}.lk:hover{opacity:.65}.tip{position:fixed;background:rgba(8,8,24,.96);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 14px;font-size:12px;color:#fff;pointer-events:none;display:none;z-index:99}</style></head><body><div id=c></div><div class=tip id=tip></div><script>"
+			VAR _h2 = "const L=[" & _L & "];const CO={Direto:'#e74c3c',Indireto:'#e67e22',Patrimonial:'#9b59b6',Gasto:'#3498db'};const el=document.getElementById('c'),w=el.offsetWidth||900,h=el.offsetHeight||460;const svg=d3.select('#c').append('svg').attr('viewBox','0 0 '+w+' '+h).attr('width',w).attr('height',h);const sk=d3.sankey().nodeId(d=>d.name).nodeWidth(16).nodePadding(10).nodeAlign(d3.sankeyLeft).extent([[20,10],[w-195,h-10]]);"
+			VAR _h3 = "const ns=[...new Set(L.flatMap(l=>[l.s,l.t]))].map(n=>({name:n}));const g=sk({nodes:ns.map(d=>({...d})),links:L.map(d=>({...d,source:d.s,target:d.t,value:+d.v}))});const tip=document.getElementById('tip');svg.append('g').selectAll('path').data(g.links).join('path').attr('class','lk').attr('d',d3.sankeyLinkHorizontal()).attr('stroke',d=>CO[d.tp]||'#27ae60').attr('stroke-width',d=>Math.max(1,d.width)).on('mouseover',(e,d)=>{tip.style.display='block';tip.innerHTML='<b>'+d.source.name+' to '+d.target.name+'</b><br>R$ '+d.value.toLocaleString('pt-BR',{minimumFractionDigits:2})}).on('mousemove',e=>{tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px'}).on('mouseout',()=>tip.style.display='none');const nd=svg.append('g').selectAll('g').data(g.nodes).join('g');nd.append('rect').attr('x',d=>d.x0).attr('y',d=>d.y0).attr('height',d=>Math.max(2,d.y1-d.y0)).attr('width',d=>d.x1-d.x0).attr('fill',d=>{const sl=d.sourceLinks[0];return sl?CO[sl.tp]||'#27ae60':'#27ae60'}).attr('rx',3).attr('opacity',.9);nd.append('text').attr('x',d=>d.x0<w*.52?d.x1+6:d.x0-6).attr('y',d=>(d.y0+d.y1)/2).attr('dy','0.35em').attr('text-anchor',d=>d.x0<w*.52?'start':'end').text(d=>d.name+(d.value>=50?' R$'+Math.round(d.value).toLocaleString('pt-BR'):'')); </script></body></html>"
+			RETURN _h1 & _h2 & _h3
+		displayFolder: HTML Visuals
+		lineageTag: c3d4e5f6-a7b8-9012-cdef-012345678903
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: ac5d674d-a7cc-4e6f-9e38-41ac41e9b096
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_estadual
+		dataType: int64
+		formatString: 0
+		lineageTag: f2f8eee5-bb2e-4239-8b52-cedd626e0243
+		summarizeBy: sum
+		sourceColumn: imp_estadual
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_municipal
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b7f03a3-467f-43ec-92ab-2607d27b7e22
+		summarizeBy: sum
+		sourceColumn: imp_municipal
+
+		annotation SummarizationSetBy = Automatic
+
+	column etapa_cadeia_principal
+		dataType: string
+		lineageTag: 27e9fc7f-6049-4c41-9361-6ac29c5bfac8
+		summarizeBy: none
+		sourceColumn: etapa_cadeia_principal
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 33f3d012-af1f-436e-94e3-52ba76a04b68
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column grupo
+		dataType: string
+		lineageTag: db95482c-b7d4-4700-aafa-0ca49bdf2f5d
+		summarizeBy: none
+		sourceColumn: grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_gasto
+		dataType: string
+		lineageTag: 5173b70c-fb02-4d90-93ba-b3456c9b9916
+		summarizeBy: none
+		sourceColumn: tipo_gasto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d814e7f-6b35-484f-bc51-d9156baab27b
+		summarizeBy: sum
+		sourceColumn: valor_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliq_indireta_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: eb4ad051-f844-4dff-a44f-2e305978bf21
+		summarizeBy: sum
+		sourceColumn: aliq_indireta_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column imposto_embutido
+		dataType: int64
+		formatString: 0
+		lineageTag: 0742bb55-1604-4189-a3d3-993c5c5d4620
+		summarizeBy: sum
+		sourceColumn: imposto_embutido
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_real
+		dataType: int64
+		formatString: 0
+		lineageTag: 2699c997-94fc-4e3d-8a2b-960c988b86f5
+		summarizeBy: sum
+		sourceColumn: custo_real
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_federal
+		dataType: int64
+		formatString: 0
+		lineageTag: c2747591-6fd9-4fca-90ea-2cc62558a9ab
+		summarizeBy: sum
+		sourceColumn: imp_federal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_gastos_mensais = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each [Name] = "fato_gastos_mensais.csv"),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column10", "Column11", "Column12", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}, {"Column1", "Column10", "Column11", "Column12", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"imp_estadual", Int64.Type}, {"imp_municipal", Int64.Type}, {"etapa_cadeia_principal", type text}, {"categoria", type text}, {"grupo", type text}, {"tipo_gasto", type text}, {"valor_total", Int64.Type}, {"aliq_indireta_pct", Int64.Type}, {"imposto_embutido", Int64.Type}, {"custo_real", Int64.Type}, {"imp_federal", Int64.Type}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
