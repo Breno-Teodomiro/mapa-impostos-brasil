@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0.0",
+  "author": {
+    "name": "PROJETO_IMPOSTOS",
+    "email": "projeto@impostos.br"
+  },
+  "resources": [
+    {
+      "resourceId": "rId0",
+      "sourceType": 5,
+      "file": "resources/mapaImpostosSankey7A2F4B1E3C9D0E6A.pbiviz.json"
+    }
+  ],
+  "visual": {
+    "guid": "mapaImpostosSankey7A2F4B1E3C9D0E6A",
+    "name": "mapaImpostosSankey",
+    "displayName": "Mapa de Impostos — Sankey",
+    "version": "1.0.0.0",
+    "description": "Visualiza a cascata de impostos da renda familiar brasileira: direto (INSS+IR), indireto (embutido em cada gasto) e patrimonial.",
+    "supportUrl": "https://github.com",
+    "gitHubUrl": "",
+    "visualClassName": "Visual"
+  },
+  "metadata": {
+    "pbivizjson": {
+      "resourceId": "rId0"
+    }
+  }
+}

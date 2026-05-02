@@ -1,0 +1,28 @@
+table Salario_Esposa_Param
+	lineageTag: e26c888d-d872-4fc3-bec8-49342d64e750
+
+	measure 'Valor Salario_Esposa_Param' = SELECTEDVALUE('Salario_Esposa_Param'[Salario_Esposa_Param], 2350)
+		lineageTag: 6c13a8ca-fcc0-4fba-96ba-4a6b10003212
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Salario_Esposa_Param
+		dataType: double
+		formatString: 0
+		lineageTag: 24221182-c44f-4a8e-b315-c58e1c6918f7
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Salario_Esposa_Param = calculated
+		mode: import
+		source = GENERATESERIES(0, 30000, 100)
+
+	annotation PBI_Id = 5230058718e6461fac18462581cbb35a
+

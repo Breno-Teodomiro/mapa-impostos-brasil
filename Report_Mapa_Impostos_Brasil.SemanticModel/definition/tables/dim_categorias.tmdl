@@ -1,0 +1,133 @@
+table dim_categorias
+	lineageTag: ee4f6867-3ca7-4071-923b-95bad5ce501c
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 004e8a61-515f-4e7f-a4d3-716a0f871aee
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_imposto_embutido
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f56c2e4-353c-4eb4-8091-a90782bd471e
+		summarizeBy: sum
+		sourceColumn: valor_imposto_embutido
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_custo_real
+		dataType: int64
+		formatString: 0
+		lineageTag: b11354de-293a-45c6-a9d1-10820bfb1912
+		summarizeBy: sum
+		sourceColumn: valor_custo_real
+
+		annotation SummarizationSetBy = Automatic
+
+	column tributos_presentes
+		dataType: string
+		lineageTag: 574fd5fc-9a24-4ce2-9b83-3362ccf9a5a9
+		summarizeBy: none
+		sourceColumn: tributos_presentes
+
+		annotation SummarizationSetBy = Automatic
+
+	column observacao
+		dataType: string
+		lineageTag: 3e3b9b65-d9d8-40b6-925b-e3cfc43152f8
+		summarizeBy: none
+		sourceColumn: observacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 88e4be7e-b4ff-4e1c-8f6f-0a855051718c
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column grupo
+		dataType: string
+		lineageTag: 79325620-8597-4aaf-b2dd-25cfc3007c17
+		summarizeBy: none
+		sourceColumn: grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_gasto
+		dataType: string
+		lineageTag: 82cb9695-4818-4261-bc14-b6cd5031a541
+		summarizeBy: none
+		sourceColumn: tipo_gasto
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_mensal_base
+		dataType: int64
+		formatString: 0
+		lineageTag: 75aac8ab-80bd-4208-82b4-83f874dc8988
+		summarizeBy: sum
+		sourceColumn: valor_mensal_base
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliq_indireta_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 31e644dd-f9b6-4686-81da-26c2bdbf8764
+		summarizeBy: sum
+		sourceColumn: aliq_indireta_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliq_federal
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ff7b853-0e88-490b-a800-7f2fc1cde1de
+		summarizeBy: sum
+		sourceColumn: aliq_federal
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliq_estadual
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ea0e60c-7f07-409b-9fc1-431dfa287413
+		summarizeBy: sum
+		sourceColumn: aliq_estadual
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliq_municipal
+		dataType: int64
+		formatString: 0
+		lineageTag: 46effd51-e3f6-48b3-9297-6362ac6c3caf
+		summarizeBy: sum
+		sourceColumn: aliq_municipal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_categorias = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each [Name] = "dim_categorias.csv"),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column10", "Column11", "Column12", "Column13", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}, {"Column1", "Column10", "Column11", "Column12", "Column13", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"valor_imposto_embutido", Int64.Type}, {"valor_custo_real", Int64.Type}, {"tributos_presentes", type text}, {"observacao", type text}, {"categoria", type text}, {"grupo", type text}, {"tipo_gasto", type text}, {"valor_mensal_base", Int64.Type}, {"aliq_indireta_total", Int64.Type}, {"aliq_federal", Int64.Type}, {"aliq_estadual", Int64.Type}, {"aliq_municipal", Int64.Type}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

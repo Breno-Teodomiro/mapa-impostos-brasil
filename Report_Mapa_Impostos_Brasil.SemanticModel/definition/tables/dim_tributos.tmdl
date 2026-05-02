@@ -1,0 +1,87 @@
+table dim_tributos
+	lineageTag: 71800646-ebaf-4685-b966-ca1576b39eab
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 12fe8ebe-0fea-4c5c-9981-3281e7d0750c
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome
+		dataType: string
+		lineageTag: 43f02682-33d1-4618-ae42-885190dd8e0b
+		summarizeBy: none
+		sourceColumn: nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column sigla
+		dataType: string
+		lineageTag: 7c5158f7-3b36-4fcf-ad21-1158c6bda30f
+		summarizeBy: none
+		sourceColumn: sigla
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: f6477770-df2d-476a-a888-fcaceb6d1e7d
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column esfera
+		dataType: string
+		lineageTag: c61eb134-30fb-42fe-8a36-74554d80c66c
+		summarizeBy: none
+		sourceColumn: esfera
+
+		annotation SummarizationSetBy = Automatic
+
+	column aliquota_nominal
+		dataType: int64
+		formatString: 0
+		lineageTag: 52dfb621-ffb4-4129-b0fa-4bbda59816ce
+		summarizeBy: sum
+		sourceColumn: aliquota_nominal
+
+		annotation SummarizationSetBy = Automatic
+
+	column incide_sobre
+		dataType: string
+		lineageTag: d9024bdb-b713-4026-a0f7-3839082e4bbb
+		summarizeBy: none
+		sourceColumn: incide_sobre
+
+		annotation SummarizationSetBy = Automatic
+
+	column observacao
+		dataType: string
+		lineageTag: de5bc2e9-def4-4535-bc74-dc33c876cc6f
+		summarizeBy: none
+		sourceColumn: observacao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_tributos = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each [Name] = "dim_tributos.csv"),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8"}, {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"nome", type text}, {"sigla", type text}, {"tipo", type text}, {"esfera", type text}, {"aliquota_nominal", Int64.Type}, {"incide_sobre", type text}, {"observacao", type text}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

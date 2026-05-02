@@ -1,0 +1,26 @@
+table Dependentes_Param
+	lineageTag: 014c1387-5fbd-49be-8964-0b95815d4ff1
+
+	measure 'Valor Dependentes_Param' = SELECTEDVALUE('Dependentes_Param'[Dependentes_Param], 1)
+		formatString: 0
+		lineageTag: 844aea9b-d987-4d10-8912-9489f97d4744
+
+	column Dependentes_Param
+		formatString: 0
+		lineageTag: ef2a021b-6ae5-4196-8b56-9c838e36abfd
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Dependentes_Param = calculated
+		mode: import
+		source = GENERATESERIES(0, 10, 1)
+
+	annotation PBI_Id = a7415562f59c40a0b2899a2c47f7e1cb
+

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "959e2e954d4dbe4a2c8b",
+  "displayName": "TT_Tributacao",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 320,
+  "type": "Tooltip"
+}

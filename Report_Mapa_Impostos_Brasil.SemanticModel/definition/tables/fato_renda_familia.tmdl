@@ -1,0 +1,301 @@
+table fato_renda_familia
+	lineageTag: a4e73f2d-20a0-4abc-8af4-a328ab9b982f
+
+	measure INSS_Marido =
+			VAR sal = [Valor Salario_Marido_Param]
+			RETURN
+			    MIN(sal, 1412.00)                              * 0.075 +
+			    MAX(MIN(sal, 2666.68) - 1412.00, 0)            * 0.09  +
+			    MAX(MIN(sal, 4000.03) - 2666.68, 0)            * 0.12  +
+			    MAX(MIN(sal, 7786.02) - 4000.03, 0)            * 0.14
+		formatString: R$ #,##0.00
+		displayFolder: INSS
+		lineageTag: 03a20da9-e19d-4a9b-a185-e5891355a7b3
+
+	measure INSS_Esposa =
+			VAR sal = [Valor Salario_Esposa_Param]
+			RETURN
+			    MIN(sal, 1412.00)                              * 0.075 +
+			    MAX(MIN(sal, 2666.68) - 1412.00, 0)            * 0.09  +
+			    MAX(MIN(sal, 4000.03) - 2666.68, 0)            * 0.12  +
+			    MAX(MIN(sal, 7786.02) - 4000.03, 0)            * 0.14
+		formatString: R$ #,##0.00
+		displayFolder: INSS
+		lineageTag: 1b00595f-affb-482f-b71d-e4b4ceba33df
+
+	measure INSS_Total_Familia = [INSS_Marido] + [INSS_Esposa]
+		formatString: R$ #,##0.00
+		displayFolder: INSS
+		lineageTag: 6b3da879-cb3e-44cc-ae70-e7eaae0ef0ee
+
+	measure INSS_Aliq_Efetiva_Marido_Pct = DIVIDE([INSS_Marido], [Valor Salario_Marido_Param], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: INSS
+		lineageTag: 3cab90b4-fc82-4a62-a1e3-a2d91c31df04
+
+	measure IRPF_Base_Marido =
+			MAX(
+			    [Valor Salario_Marido_Param] - [INSS_Marido]
+			    - (189.59 * [Valor Dependentes_Param]),
+			    0
+			)
+		formatString: R$ #,##0.00
+		displayFolder: IRPF
+		lineageTag: e0e40fe5-8445-4191-a3e8-b93483a764d8
+
+	measure IRPF_Marido =
+			VAR base = [IRPF_Base_Marido]
+			VAR imposto =
+			    SWITCH(
+			        TRUE(),
+			        base <= 2259.20, 0,
+			        base <= 2826.65, base * 0.075  - 169.44,
+			        base <= 3751.05, base * 0.15   - 381.44,
+			        base <= 4664.68, base * 0.225  - 662.77,
+			                         base * 0.275  - 896.00
+			    )
+			RETURN MAX(imposto, 0)
+		formatString: R$ #,##0.00
+		displayFolder: IRPF
+		lineageTag: 1c985711-4888-430c-860e-47bfe8340da2
+
+	measure IRPF_Base_Esposa = MAX([Valor Salario_Esposa_Param] - [INSS_Esposa], 0)
+		formatString: R$ #,##0.00
+		displayFolder: IRPF
+		lineageTag: 23f46c9e-d7c7-432f-8b8b-72419438ca62
+
+	measure IRPF_Esposa =
+			VAR base = [IRPF_Base_Esposa]
+			VAR imposto =
+			    SWITCH(
+			        TRUE(),
+			        base <= 2259.20, 0,
+			        base <= 2826.65, base * 0.075  - 169.44,
+			        base <= 3751.05, base * 0.15   - 381.44,
+			        base <= 4664.68, base * 0.225  - 662.77,
+			                         base * 0.275  - 896.00
+			    )
+			RETURN MAX(imposto, 0)
+		formatString: R$ #,##0.00
+		displayFolder: IRPF
+		lineageTag: 2ad405ca-d483-477c-ab0b-b672d38338a8
+
+	measure IRPF_Total_Familia = [IRPF_Marido] + [IRPF_Esposa]
+		formatString: R$ #,##0.00
+		displayFolder: IRPF
+		lineageTag: 6bcacecd-0ce7-4061-ae59-05ff79e9fd12
+
+	measure IRPF_Aliq_Efetiva_Marido_Pct = DIVIDE([IRPF_Marido], [Valor Salario_Marido_Param], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: IRPF
+		lineageTag: 91815194-675a-4a34-99d4-8255ad79576f
+
+	measure Renda_Bruta_Total = [Valor Salario_Marido_Param] + [Valor Salario_Esposa_Param]
+		formatString: R$ #,##0.00
+		displayFolder: Renda
+		lineageTag: d7f4bd23-e408-4ebe-866e-b2b348df4670
+
+	measure Tributacao_Direta_Total = [INSS_Total_Familia] + [IRPF_Total_Familia]
+		formatString: R$ #,##0.00
+		displayFolder: Renda
+		lineageTag: 0b326021-4541-4e55-8faa-366e9721f911
+
+	measure Renda_Liquida_Total = [Renda_Bruta_Total] - [Tributacao_Direta_Total]
+		formatString: R$ #,##0.00
+		displayFolder: Renda
+		lineageTag: e98a66cc-3767-4389-939e-e63be42353de
+
+	measure Aliq_Efetiva_Direta_Pct = DIVIDE([Tributacao_Direta_Total], [Renda_Bruta_Total], 0) * 100
+		formatString: 0.00"%"
+		displayFolder: Renda
+		lineageTag: 979da857-8ef9-42c8-b8bd-69063ff71be0
+
+	measure Percentil_Brasil_Estimado =
+			VAR renda = [Renda_Bruta_Total]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        renda > 22000, "Top 1%",
+			        renda > 12000, "Top 5%",
+			        renda > 8000,  "Top 10%",
+			        renda > 5000,  "Top 20%",
+			        renda > 3000,  "Top 40%",
+			        "Abaixo da mediana"
+			    )
+		displayFolder: Benchmark
+		lineageTag: 5cc4bcf9-d8c7-4493-aa75-98f8401a813c
+
+	measure Percentil_Nordeste_Estimado =
+			VAR renda = [Renda_Bruta_Total]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        renda > 12000, "Top 1%",
+			        renda > 6000,  "Top 5%",
+			        renda > 4000,  "Top 10%",
+			        renda > 2500,  "Top 20%",
+			        "Abaixo da mediana"
+			    )
+		displayFolder: Benchmark
+		lineageTag: 583eee96-592a-4e3f-a44d-13c359044ee4
+
+	column id_membro
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e5f4031-474d-42db-a508-ad98a1eb1797
+		summarizeBy: sum
+		sourceColumn: id_membro
+
+		annotation SummarizationSetBy = Automatic
+
+	column irpf_base_calculo
+		dataType: int64
+		formatString: 0
+		lineageTag: 14edc05c-e2e6-419f-9600-27906f64b44f
+		summarizeBy: sum
+		sourceColumn: irpf_base_calculo
+
+		annotation SummarizationSetBy = Automatic
+
+	column irpf_deducao_dependentes
+		dataType: int64
+		formatString: 0
+		lineageTag: c25d5c76-413f-4cc7-8b2e-f4b8c7398f66
+		summarizeBy: sum
+		sourceColumn: irpf_deducao_dependentes
+
+		annotation SummarizationSetBy = Automatic
+
+	column irpf_valor
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a89088d-3152-4ae3-a4e3-5c2143ebfcd1
+		summarizeBy: sum
+		sourceColumn: irpf_valor
+
+		annotation SummarizationSetBy = Automatic
+
+	column irpf_aliq_efetiva_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: 70864cd4-7aaf-45a2-a4aa-1ee7348b706d
+		summarizeBy: sum
+		sourceColumn: irpf_aliq_efetiva_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column renda_liquida
+		dataType: int64
+		formatString: 0
+		lineageTag: 39662493-ed2e-4831-99e7-a49a9f3a09f6
+		summarizeBy: sum
+		sourceColumn: renda_liquida
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_dependentes_declarados
+		dataType: int64
+		formatString: 0
+		lineageTag: d37ed546-5284-4bce-9277-2bdc1464209b
+		summarizeBy: sum
+		sourceColumn: num_dependentes_declarados
+
+		annotation SummarizationSetBy = Automatic
+
+	column observacao
+		dataType: string
+		lineageTag: cc742306-c9e9-44da-9c62-d7133d1752fe
+		summarizeBy: none
+		sourceColumn: observacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column membro
+		dataType: string
+		lineageTag: 0f567fbb-701f-4540-9b5e-94c8e897669f
+		summarizeBy: none
+		sourceColumn: membro
+
+		annotation SummarizationSetBy = Automatic
+
+	column salario_bruto
+		dataType: int64
+		formatString: 0
+		lineageTag: bff68bf6-cbb4-4e13-ae8c-5485c2df0eeb
+		summarizeBy: sum
+		sourceColumn: salario_bruto
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_f1_ate_1412
+		dataType: int64
+		formatString: 0
+		lineageTag: cbce2ed7-1e73-4062-81a4-d51a6d58de29
+		summarizeBy: sum
+		sourceColumn: inss_f1_ate_1412
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_f2_1412_2667
+		dataType: int64
+		formatString: 0
+		lineageTag: c0be3b2c-b7b3-4274-b562-71a7ba10b9b3
+		summarizeBy: sum
+		sourceColumn: inss_f2_1412_2667
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_f3_2667_4000
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b9f0339-9493-4049-a150-d6eb921502bc
+		summarizeBy: sum
+		sourceColumn: inss_f3_2667_4000
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_f4_4000_7786
+		dataType: int64
+		formatString: 0
+		lineageTag: dda6f04e-4553-4930-a842-10e108f02a6c
+		summarizeBy: sum
+		sourceColumn: inss_f4_4000_7786
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dad1593-e14e-4975-9848-8275231ae717
+		summarizeBy: sum
+		sourceColumn: inss_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column inss_aliq_efetiva_pct
+		dataType: int64
+		formatString: 0
+		lineageTag: b96ae622-4af4-4c7a-95b9-4d3616c625e2
+		summarizeBy: sum
+		sourceColumn: inss_aliq_efetiva_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_renda_familia = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each [Name] = "fato_renda_familia.csv"),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column10", "Column11", "Column12", "Column13", "Column14", "Column15", "Column16", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}, {"Column1", "Column10", "Column11", "Column12", "Column13", "Column14", "Column15", "Column16", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id_membro", Int64.Type}, {"irpf_base_calculo", Int64.Type}, {"irpf_deducao_dependentes", Int64.Type}, {"irpf_valor", Int64.Type}, {"irpf_aliq_efetiva_pct", Int64.Type}, {"renda_liquida", Int64.Type}, {"num_dependentes_declarados", Int64.Type}, {"observacao", type text}, {"membro", type text}, {"salario_bruto", Int64.Type}, {"inss_f1_ate_1412", Int64.Type}, {"inss_f2_1412_2667", Int64.Type}, {"inss_f3_2667_4000", Int64.Type}, {"inss_f4_4000_7786", Int64.Type}, {"inss_total", Int64.Type}, {"inss_aliq_efetiva_pct", Int64.Type}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

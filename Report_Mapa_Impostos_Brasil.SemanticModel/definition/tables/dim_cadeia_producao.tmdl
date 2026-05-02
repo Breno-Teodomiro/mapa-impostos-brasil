@@ -1,0 +1,80 @@
+table dim_cadeia_producao
+	lineageTag: 1e87dc73-fd80-410b-a302-29c04e636004
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ded4854-a7ec-4d3e-b979-0728c13ffcba
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column etapa
+		dataType: string
+		lineageTag: 29048d63-6f0c-4f69-bda3-b0c74eaae273
+		summarizeBy: none
+		sourceColumn: etapa
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordem
+		dataType: int64
+		formatString: 0
+		lineageTag: 96dc7c23-28c6-4803-a865-f4210a160c07
+		summarizeBy: sum
+		sourceColumn: ordem
+
+		annotation SummarizationSetBy = Automatic
+
+	column descricao_resumida
+		dataType: string
+		lineageTag: 8bb84bcb-fd7d-41cb-ae98-331571f2e26c
+		summarizeBy: none
+		sourceColumn: descricao_resumida
+
+		annotation SummarizationSetBy = Automatic
+
+	column tributos_tipicos
+		dataType: string
+		lineageTag: a39e4dba-e53e-427d-8317-9480323e1f05
+		summarizeBy: none
+		sourceColumn: tributos_tipicos
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_tipico_do_preco_final
+		dataType: int64
+		formatString: 0
+		lineageTag: ea1e2732-e5a2-4b6a-b879-aaa2d8398011
+		summarizeBy: sum
+		sourceColumn: pct_tipico_do_preco_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column exemplo_concreto
+		dataType: string
+		lineageTag: 4e7f25bd-7b4a-4944-909e-c473d2b0e637
+		summarizeBy: none
+		sourceColumn: exemplo_concreto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cadeia_producao = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each ([Name] = "dim_cadeia_producao.csv")),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7"}, {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"etapa", type text}, {"ordem", Int64.Type}, {"descricao_resumida", type text}, {"tributos_tipicos", type text}, {"pct_tipico_do_preco_final", Int64.Type}, {"exemplo_concreto", type text}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

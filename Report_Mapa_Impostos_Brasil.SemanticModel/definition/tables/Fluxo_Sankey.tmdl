@@ -1,0 +1,73 @@
+table Fluxo_Sankey
+	lineageTag: 1a354e88-a26e-4d3e-aa78-19f8496a5fce
+
+	column fonte
+		lineageTag: 5e9cf813-29bd-43a9-bc7d-221b83bb1b95
+		isNameInferred
+		sourceColumn: [fonte]
+
+	column destino
+		lineageTag: 4045d348-a745-4b18-9e74-d1282f85038b
+		isNameInferred
+		sourceColumn: [destino]
+
+	column valor
+		lineageTag: 02535c2e-ec46-4743-b55c-d6446273b86f
+		isNameInferred
+		sourceColumn: [valor]
+
+	column tipo
+		lineageTag: 494cc71d-08b4-4d12-a288-46b00d74aa0b
+		isNameInferred
+		sourceColumn: [tipo]
+
+	column esfera
+		lineageTag: 86c98cd2-c0dd-4b96-ae5c-1f20cba08a25
+		isNameInferred
+		sourceColumn: [esfera]
+
+	partition Fluxo_Sankey = calculated
+		mode: import
+		source =
+				VAR renda_bruta = [Renda_Bruta_Total]
+				VAR inss        = [INSS_Total_Familia]
+				VAR irpf        = [IRPF_Total_Familia]
+				VAR renda_liq   = [Renda_Liquida_Total]
+				VAR ipva        = [Imposto_Patrimonial_IPVA]
+				VAR iptu        = [Imposto_Patrimonial_IPTU]
+				VAR licenc      = [Imposto_Patrimonial_Licenciamento]
+				RETURN
+				UNION(
+				    ROW("fonte", "Renda Bruta",          "destino", "INSS (Federal)",            "valor", inss,      "tipo", "Direto",      "esfera", "Federal"),
+				    ROW("fonte", "Renda Bruta",          "destino", "IRPF (Federal)",            "valor", irpf,      "tipo", "Direto",      "esfera", "Federal"),
+				    ROW("fonte", "Renda Bruta",          "destino", "Renda Líquida",             "valor", renda_liq, "tipo", "Renda",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Alimentação",               "valor", 1600,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Moradia",                   "valor", 1200,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Combustível",               "valor",  900,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Financiamento Carro",       "valor",  900,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Energia Elétrica",          "valor",  450,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Saúde",                     "valor",  420,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Escola",                    "valor",  500,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Farmácia",                  "valor",  400,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Telecom",                   "valor",  238,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Vestuário",                 "valor",  250,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Lazer",                     "valor",  300,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Seguro Carro",              "valor",  150,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Outros Gastos",             "valor",  720,      "tipo", "Gasto",       "esfera", "N/A"),
+				    ROW("fonte", "Renda Líquida",        "destino", "IPVA (Estadual)",           "valor", ipva,      "tipo", "Patrimonial", "esfera", "Estadual"),
+				    ROW("fonte", "Renda Líquida",        "destino", "IPTU (Municipal)",          "valor", iptu,      "tipo", "Patrimonial", "esfera", "Municipal"),
+				    ROW("fonte", "Renda Líquida",        "destino", "Licenciamento (Estad.)",    "valor", licenc,    "tipo", "Patrimonial", "esfera", "Estadual"),
+				    ROW("fonte", "Alimentação",         "destino", "Imposto Indir. — Alim.",     "valor",  416,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Moradia",              "destino", "Imposto Indir. — Mor.",      "valor",  216,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Combustível",          "destino", "Imposto Indir. — Comb.",     "valor",  387,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Financiamento Carro",  "destino", "Imposto Indir. — Veíc.",    "valor",  270,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Energia Elétrica",     "destino", "Imposto Indir. — Energ.",    "valor",  198,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Saúde",               "destino", "Imposto Indir. — Saúde",     "valor",   92,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Escola",              "destino", "Imposto Indir. — Educ.",     "valor",  110,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Farmácia",            "destino", "Imposto Indir. — Farm.",     "valor",  128,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Telecom",             "destino", "Imposto Indir. — Tel.",      "valor",   95,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Vestuário",           "destino", "Imposto Indir. — Vest.",     "valor",   88,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Lazer",               "destino", "Imposto Indir. — Laz.",      "valor",   84,      "tipo", "Indireto",    "esfera", "Mix"),
+				    ROW("fonte", "Outros Gastos",       "destino", "Imposto Indir. — Outros",    "valor",   53,      "tipo", "Indireto",    "esfera", "Mix")
+				)
+

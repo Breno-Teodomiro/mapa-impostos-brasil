@@ -1,0 +1,8 @@
+relationship da3dc603-9fce-7b7d-d440-b158218bd527
+	fromColumn: fato_cascata_tributaria.categoria
+	toColumn: dim_categorias.categoria
+
+relationship df079320-16e5-f812-bb1d-4fd6e0613f6f
+	fromColumn: fato_gastos_mensais.categoria
+	toColumn: dim_categorias.categoria
+

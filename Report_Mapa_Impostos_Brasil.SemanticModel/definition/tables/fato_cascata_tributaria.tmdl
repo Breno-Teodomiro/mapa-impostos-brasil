@@ -1,0 +1,136 @@
+table fato_cascata_tributaria
+	lineageTag: 983c9119-6326-496c-b998-d7ce99e263d7
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 10ab5dce-348b-4c22-807d-c9bb909ebe5e
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_imposto_cadeia
+		dataType: int64
+		formatString: 0
+		lineageTag: 27547dc7-ab73-45dd-a136-95a2d805fe72
+		summarizeBy: sum
+		sourceColumn: total_imposto_cadeia
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_cadeia_sobre_preco
+		dataType: int64
+		formatString: 0
+		lineageTag: 083ae3be-65fa-4a7a-af60-17562c6199fa
+		summarizeBy: sum
+		sourceColumn: pct_cadeia_sobre_preco
+
+		annotation SummarizationSetBy = Automatic
+
+	column custo_real_sem_nenhum_imposto
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c74d7cc-1e9f-425c-9fba-cc33b50552f2
+		summarizeBy: sum
+		sourceColumn: custo_real_sem_nenhum_imposto
+
+		annotation SummarizationSetBy = Automatic
+
+	column descricao_cascata
+		dataType: string
+		lineageTag: a5429dbb-806c-433e-a586-07701e1618a6
+		summarizeBy: none
+		sourceColumn: descricao_cascata
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 415e85b8-bc39-40e3-bf33-5b6588b02372
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 02f93048-0d13-4fa0-b918-d2f44a122cb0
+		summarizeBy: sum
+		sourceColumn: valor_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_materia_prima
+		dataType: int64
+		formatString: 0
+		lineageTag: b2aad9b2-a657-41d2-857c-828dea2dc427
+		summarizeBy: sum
+		sourceColumn: imp_materia_prima
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_industria
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e6e4d1d-d5a1-41ed-8ef4-313e6c56150e
+		summarizeBy: sum
+		sourceColumn: imp_industria
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_distribuicao
+		dataType: int64
+		formatString: 0
+		lineageTag: e619bf71-7b71-4a67-8bb6-699c5360344c
+		summarizeBy: sum
+		sourceColumn: imp_distribuicao
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_varejo
+		dataType: int64
+		formatString: 0
+		lineageTag: c3c09c03-cf7a-411d-a12e-c1e343a5bbe8
+		summarizeBy: sum
+		sourceColumn: imp_varejo
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_logistica
+		dataType: int64
+		formatString: 0
+		lineageTag: 63c1f867-bc76-4a1b-8c74-7a2c36fbae30
+		summarizeBy: sum
+		sourceColumn: imp_logistica
+
+		annotation SummarizationSetBy = Automatic
+
+	column imp_consumidor_direto
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b49b545-e0ca-42b3-a72d-41e3c5f0d0b0
+		summarizeBy: sum
+		sourceColumn: imp_consumidor_direto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_cascata_tributaria = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("C:\PROJETOS\PROJETO_IMPOSTOS\dados"),
+				    #"Linhas Filtradas" = Table.SelectRows(Fonte, each [Name] = "fato_cascata_tributaria.csv"),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Conteudo", each Csv.Document([Content])),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Personalização Adicionada",{"Conteudo"}),
+				    #"Conteudo Expandido" = Table.ExpandTableColumn(#"Outras Colunas Removidas", "Conteudo", {"Column1", "Column10", "Column11", "Column12", "Column13", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}, {"Column1", "Column10", "Column11", "Column12", "Column13", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conteudo Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"total_imposto_cadeia", Int64.Type}, {"pct_cadeia_sobre_preco", Int64.Type}, {"custo_real_sem_nenhum_imposto", Int64.Type}, {"descricao_cascata", type text}, {"categoria", type text}, {"valor_total", Int64.Type}, {"imp_materia_prima", Int64.Type}, {"imp_industria", Int64.Type}, {"imp_distribuicao", Int64.Type}, {"imp_varejo", Int64.Type}, {"imp_logistica", Int64.Type}, {"imp_consumidor_direto", Int64.Type}}, "en-US")
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
