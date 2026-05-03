@@ -115,51 +115,81 @@ table fato_gastos_mensais
 		displayFolder: HTML Visuals
 		lineageTag: c3d4e5f6-a7b8-9012-cdef-012345678903
 
-
 	measure HTML_Tributacao_Hero =
-				VAR _dir  = ROUND([Tributacao_Direta_Total], 0)
-				VAR _ind  = ROUND([Total_Imposto_Indireto_Embutido], 0)
-				VAR _pat  = ROUND([Total_Patrimonial], 0)
-				VAR _tot  = _dir + _ind + _pat
-				VAR _ren  = ROUND([Renda_Bruta_Total], 0)
-				VAR _inss = ROUND([INSS_Total_Familia], 0)
-				VAR _irpf = ROUND([IRPF_Total_Familia], 0)
-				VAR _fed  = ROUND([Imposto_Indireto_Federal], 0)
-				VAR _est  = ROUND([Imposto_Indireto_Estadual], 0)
-				VAR _mun  = ROUND([Imposto_Indireto_Municipal], 0)
-				VAR _pD   = FORMAT(DIVIDE(_dir,_ren,0)*100,"0.0")
-				VAR _pI   = FORMAT(DIVIDE(_ind,_ren,0)*100,"0.0")
-				VAR _pP   = FORMAT(DIVIDE(_pat,_ren,0)*100,"0.0")
-				VAR _pT   = FORMAT(DIVIDE(_tot,_ren,0)*100,"0.0")
-				VAR _s1   = FORMAT(DIVIDE(_dir,_tot,0)*100,"0.0")
-				VAR _s2   = FORMAT(DIVIDE(_dir+_ind,_tot,0)*100,"0.0")
-				VAR _bFd  = FORMAT(DIVIDE(_fed,_ind,0)*100,"0")
-				VAR _bEt  = FORMAT(DIVIDE(_est,_ind,0)*100,"0")
-				VAR _bMn  = FORMAT(DIVIDE(_mun,_ind,0)*100,"0")
-				VAR _bIn  = FORMAT(DIVIDE(_inss,_dir,0)*100,"0")
-				VAR _bIr  = FORMAT(DIVIDE(_irpf,_dir,0)*100,"0")
-				VAR _fDir = FORMAT(_dir,"#,##0")
-				VAR _fInd = FORMAT(_ind,"#,##0")
-				VAR _fPat = FORMAT(_pat,"#,##0")
-				VAR _fIns = FORMAT(_inss,"#,##0")
-				VAR _fIrp = FORMAT(_irpf,"#,##0")
-				VAR _fFed = FORMAT(_fed,"#,##0")
-				VAR _fEst = FORMAT(_est,"#,##0")
-				VAR _fMun = FORMAT(_mun,"#,##0")
-				VAR _grad = "conic-gradient(#e74c3c 0% " & _s1 & "%,#e67e22 " & _s1 & "% " & _s2 & "%,#9b59b6 " & _s2 & "% 100%)"
-				VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:16px;gap:10px}.top{display:flex;gap:10px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px}.lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:4px}.val{font-size:24px;font-weight:800;letter-spacing:-1px;line-height:1.1}.sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px}.mid{display:flex;gap:16px;flex:1;min-height:0}.dc{flex:0 0 200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}.dn{width:168px;height:168px;border-radius:50%;position:relative}.hl{position:absolute;inset:22px;border-radius:50%;background:#0f0f1a;display:flex;flex-direction:column;align-items:center;justify-content:center}.hp{font-size:21px;font-weight:800}.hq{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:1px}.leg{width:100%;display:flex;flex-direction:column;gap:5px}.lr{display:flex;align-items:center;gap:7px;font-size:11px}.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}.ln{flex:1;color:rgba(255,255,255,.55)}.lv{font-weight:700}.bc{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px}.sh{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:1px;margin-top:6px}.br .bh{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}.bn{color:rgba(255,255,255,.5)}.bv{font-weight:600}.bt{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px}</style></head><body><div class=""top""><div class=""card""><div class=""lbl"">Tributacao Direta</div><div class=""val"" style=""color:#e74c3c"">R$ " & _fDir & "</div><div class=""sub"">INSS R$" & _fIns & " + IRPF R$" & _fIrp & " &middot; " & _pD & "% da renda</div></div>"
-				      & "<div class=""card""><div class=""lbl"">Tributacao Indireta</div><div class=""val"" style=""color:#e67e22"">R$ " & _fInd & "</div><div class=""sub"">embutida nos precos &middot; " & _pI & "% da renda</div></div>"
-				      & "<div class=""card""><div class=""lbl"">Patrimonial</div><div class=""val"" style=""color:#9b59b6"">R$ " & _fPat & "</div><div class=""sub"">IPVA + IPTU + Licenc. &middot; " & _pP & "% da renda</div></div></div>"
-				VAR _h2 = "<div class=""mid""><div class=""dc""><div class=""dn"" style=""background:" & _grad & """><div class=""hl""><span class=""hp"">" & _pT & "%</span><span class=""hq"">da renda</span></div></div>"
-				      & "<div class=""leg""><div class=""lr""><div class=""ld"" style=""background:#e74c3c""></div><span class=""ln"">Direta</span><span class=""lv"">" & _pD & "%</span></div><div class=""lr""><div class=""ld"" style=""background:#e67e22""></div><span class=""ln"">Indireta</span><span class=""lv"">" & _pI & "%</span></div><div class=""lr""><div class=""ld"" style=""background:#9b59b6""></div><span class=""ln"">Patrimonial</span><span class=""lv"">" & _pP & "%</span></div></div></div>"
-				VAR _h3 = "<div class=""bc""><div class=""sh"">Indireta por esfera governamental</div><div class=""br""><div class=""bh""><span class=""bn"">Federal (PIS/COFINS/IPI)</span><span class=""bv"">R$ " & _fFed & "</span></div><div class=""bt""><div class=""bf"" style=""background:#3498db;width:" & _bFd & "%""></div></div></div>"
-				      & "<div class=""br""><div class=""bh""><span class=""bn"">Estadual (ICMS)</span><span class=""bv"">R$ " & _fEst & "</span></div><div class=""bt""><div class=""bf"" style=""background:#27ae60;width:" & _bEt & "%""></div></div></div>"
-				      & "<div class=""br""><div class=""bh""><span class=""bn"">Municipal (ISS)</span><span class=""bv"">R$ " & _fMun & "</span></div><div class=""bt""><div class=""bf"" style=""background:#f39c12;width:" & _bMn & "%""></div></div></div>"
-				      & "<div class=""sh"">Direta: INSS vs IRPF</div><div class=""br""><div class=""bh""><span class=""bn"">INSS - Previdencia Social</span><span class=""bv"">R$ " & _fIns & "</span></div><div class=""bt""><div class=""bf"" style=""background:#e74c3c;width:" & _bIn & "%""></div></div></div>"
-				      & "<div class=""br""><div class=""bh""><span class=""bn"">IRPF - Imposto de Renda</span><span class=""bv"">R$ " & _fIrp & "</span></div><div class=""bt""><div class=""bf"" style=""background:#e67e22;width:" & _bIr & "%""></div></div></div></div></div></body></html>"
-				RETURN _h1 & _h2 & _h3
+			VAR _dir  = ROUND([Tributacao_Direta_Total], 0)
+			VAR _ind  = ROUND([Total_Imposto_Indireto_Embutido], 0)
+			VAR _pat  = ROUND([Total_Patrimonial], 0)
+			VAR _tot  = _dir + _ind + _pat
+			VAR _ren  = ROUND([Renda_Bruta_Total], 0)
+			VAR _inss = ROUND([INSS_Total_Familia], 0)
+			VAR _irpf = ROUND([IRPF_Total_Familia], 0)
+			VAR _fed  = ROUND([Imposto_Indireto_Federal], 0)
+			VAR _est  = ROUND([Imposto_Indireto_Estadual], 0)
+			VAR _mun  = ROUND([Imposto_Indireto_Municipal], 0)
+			VAR _pD   = FORMAT(DIVIDE(_dir,_ren,0)*100,"0.0")
+			VAR _pI   = FORMAT(DIVIDE(_ind,_ren,0)*100,"0.0")
+			VAR _pP   = FORMAT(DIVIDE(_pat,_ren,0)*100,"0.0")
+			VAR _pT   = FORMAT(DIVIDE(_tot,_ren,0)*100,"0.0")
+			VAR _s1   = FORMAT(DIVIDE(_dir,_tot,0)*100,"0.0")
+			VAR _s2   = FORMAT(DIVIDE(_dir+_ind,_tot,0)*100,"0.0")
+			VAR _bFd  = FORMAT(DIVIDE(_fed,_ind,0)*100,"0")
+			VAR _bEt  = FORMAT(DIVIDE(_est,_ind,0)*100,"0")
+			VAR _bMn  = FORMAT(DIVIDE(_mun,_ind,0)*100,"0")
+			VAR _bIn  = FORMAT(DIVIDE(_inss,_dir,0)*100,"0")
+			VAR _bIr  = FORMAT(DIVIDE(_irpf,_dir,0)*100,"0")
+			VAR _fDir = FORMAT(_dir,"#,##0")
+			VAR _fInd = FORMAT(_ind,"#,##0")
+			VAR _fPat = FORMAT(_pat,"#,##0")
+			VAR _fIns = FORMAT(_inss,"#,##0")
+			VAR _fIrp = FORMAT(_irpf,"#,##0")
+			VAR _fFed = FORMAT(_fed,"#,##0")
+			VAR _fEst = FORMAT(_est,"#,##0")
+			VAR _fMun = FORMAT(_mun,"#,##0")
+			VAR _grad = "conic-gradient(#e74c3c 0% " & _s1 & "%,#e67e22 " & _s1 & "% " & _s2 & "%,#9b59b6 " & _s2 & "% 100%)"
+			VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:16px;gap:10px}.top{display:flex;gap:10px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px}.lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:4px}.val{font-size:24px;font-weight:800;letter-spacing:-1px;line-height:1.1}.sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px}.mid{display:flex;gap:16px;flex:1;min-height:0}.dc{flex:0 0 200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}.dn{width:168px;height:168px;border-radius:50%;position:relative}.hl{position:absolute;inset:22px;border-radius:50%;background:#0f0f1a;display:flex;flex-direction:column;align-items:center;justify-content:center}.hp{font-size:21px;font-weight:800}.hq{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:1px}.leg{width:100%;display:flex;flex-direction:column;gap:5px}.lr{display:flex;align-items:center;gap:7px;font-size:11px}.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}.ln{flex:1;color:rgba(255,255,255,.55)}.lv{font-weight:700}.bc{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px}.sh{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:1px;margin-top:6px}.br .bh{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}.bn{color:rgba(255,255,255,.5)}.bv{font-weight:600}.bt{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px}</style></head><body><div class=""top""><div class=""card""><div class=""lbl"">Tributacao Direta</div><div class=""val"" style=""color:#e74c3c"">R$ " & _fDir & "</div><div class=""sub"">INSS R$" & _fIns & " + IRPF R$" & _fIrp & " &middot; " & _pD & "% da renda</div></div>"
+			      & "<div class=""card""><div class=""lbl"">Tributacao Indireta</div><div class=""val"" style=""color:#e67e22"">R$ " & _fInd & "</div><div class=""sub"">embutida nos precos &middot; " & _pI & "% da renda</div></div>"
+			      & "<div class=""card""><div class=""lbl"">Patrimonial</div><div class=""val"" style=""color:#9b59b6"">R$ " & _fPat & "</div><div class=""sub"">IPVA + IPTU + Licenc. &middot; " & _pP & "% da renda</div></div></div>"
+			VAR _h2 = "<div class=""mid""><div class=""dc""><div class=""dn"" style=""background:" & _grad & """><div class=""hl""><span class=""hp"">" & _pT & "%</span><span class=""hq"">da renda</span></div></div>"
+			      & "<div class=""leg""><div class=""lr""><div class=""ld"" style=""background:#e74c3c""></div><span class=""ln"">Direta</span><span class=""lv"">" & _pD & "%</span></div><div class=""lr""><div class=""ld"" style=""background:#e67e22""></div><span class=""ln"">Indireta</span><span class=""lv"">" & _pI & "%</span></div><div class=""lr""><div class=""ld"" style=""background:#9b59b6""></div><span class=""ln"">Patrimonial</span><span class=""lv"">" & _pP & "%</span></div></div></div>"
+			VAR _h3 = "<div class=""bc""><div class=""sh"">Indireta por esfera governamental</div><div class=""br""><div class=""bh""><span class=""bn"">Federal (PIS/COFINS/IPI)</span><span class=""bv"">R$ " & _fFed & "</span></div><div class=""bt""><div class=""bf"" style=""background:#3498db;width:" & _bFd & "%""></div></div></div>"
+			      & "<div class=""br""><div class=""bh""><span class=""bn"">Estadual (ICMS)</span><span class=""bv"">R$ " & _fEst & "</span></div><div class=""bt""><div class=""bf"" style=""background:#27ae60;width:" & _bEt & "%""></div></div></div>"
+			      & "<div class=""br""><div class=""bh""><span class=""bn"">Municipal (ISS)</span><span class=""bv"">R$ " & _fMun & "</span></div><div class=""bt""><div class=""bf"" style=""background:#f39c12;width:" & _bMn & "%""></div></div></div>"
+			      & "<div class=""sh"">Direta: INSS vs IRPF</div><div class=""br""><div class=""bh""><span class=""bn"">INSS - Previdencia Social</span><span class=""bv"">R$ " & _fIns & "</span></div><div class=""bt""><div class=""bf"" style=""background:#e74c3c;width:" & _bIn & "%""></div></div></div>"
+			      & "<div class=""br""><div class=""bh""><span class=""bn"">IRPF - Imposto de Renda</span><span class=""bv"">R$ " & _fIrp & "</span></div><div class=""bt""><div class=""bf"" style=""background:#e67e22;width:" & _bIr & "%""></div></div></div></div></div></body></html>"
+			RETURN _h1 & _h2 & _h3
 		displayFolder: HTML Visuals
 		lineageTag: d4e5f6a7-b8c9-0123-defa-123456789004
+
+
+	measure HTML_Cascata_Hero =
+				VAR _maxV = MAXX(fato_gastos_mensais, fato_gastos_mensais[valor_total])
+				VAR _rows =
+				    CONCATENATEX(
+				        TOPN(25, fato_gastos_mensais, fato_gastos_mensais[valor_total], DESC),
+				        "<div class=""br"">"
+				        & "<div class=""bn"">" & fato_gastos_mensais[categoria] & "</div>"
+				        & "<div class=""bb"">"
+				        & "<div class=""bc"" style=""width:"
+				            & FORMAT(DIVIDE(fato_gastos_mensais[custo_real], _maxV, 0) * 62, "0")
+				            & "%""></div>"
+				        & "<div class=""bi"" style=""width:"
+				            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], _maxV, 0) * 62, "0")
+				            & "%""></div>"
+				        & "</div>"
+				        & "<div class=""bpct"">"
+				            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], fato_gastos_mensais[valor_total], 0) * 100, "0")
+				            & "%</div>"
+				        & "<div class=""bval"">R$ "
+				            & FORMAT(fato_gastos_mensais[valor_total], "#,##0")
+				            & "</div>"
+				        & "</div>",
+				        ""
+				    )
+				VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;overflow:hidden}.hd{flex-shrink:0;margin-bottom:8px}.ht{font-size:13px;font-weight:700;letter-spacing:-.3px}.hs{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}.leg{display:flex;gap:14px;margin-top:6px;font-size:10px;color:rgba(255,255,255,.45)}.li{display:flex;align-items:center;gap:5px}.ld{width:10px;height:10px;border-radius:2px}.rows{flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden}.br{display:flex;align-items:center;gap:8px;padding:1px 0}.bn{width:128px;flex-shrink:0;font-size:10px;color:rgba(255,255,255,.62);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bb{flex:1;display:flex;height:16px;gap:1px;align-items:stretch}.bc{background:rgba(52,152,219,.5);border-radius:3px 0 0 3px;height:100%}.bi{background:rgba(230,126,34,.78);border-radius:0 3px 3px 0;height:100%}.bpct{width:34px;font-size:10px;font-weight:700;color:#e67e22;flex-shrink:0;text-align:right}.bval{width:56px;font-size:9px;color:rgba(255,255,255,.3);flex-shrink:0;text-align:right}</style></head><body><div class=""hd""><div class=""ht"">Imposto Embutido por Categoria de Gasto</div><div class=""hs"">Tributos incorporados na cadeia produtiva (industria - distribuidor - varejo - consumidor)</div><div class=""leg""><div class=""li""><div class=""ld"" style=""background:rgba(52,152,219,.5)""></div>Custo real</div><div class=""li""><div class=""ld"" style=""background:rgba(230,126,34,.78)""></div>Imposto embutido</div></div></div><div class=""rows"">"
+				VAR _h2 = "</div></body></html>"
+				RETURN _h1 & _rows & _h2
+		displayFolder: HTML Visuals
+		lineageTag: e5f6a7b8-c9d0-1234-efab-234567890005
 
 	column id
 		dataType: int64
