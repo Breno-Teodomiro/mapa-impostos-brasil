@@ -249,8 +249,8 @@ table fato_gastos_mensais
 		lineageTag: a7b8c9d0-e1f2-3456-abcd-456789012007
 
 	measure HTML_Navbar_Title = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:transparent;height:100vh;display:flex;align-items:center;padding:0 18px;gap:13px;font-family:Inter,system-ui,sans-serif}.ico{width:44px;height:44px;background:linear-gradient(135deg,#e74c3c,#e67e22);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 4px 14px rgba(231,76,60,.35)}.tx{display:flex;flex-direction:column}.t1{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.4px;line-height:1.2}.t2{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-top:2px}</style></head><body><div class=""ico"">R$</div><div class=""tx""><div class=""t1"">Mapa de Impostos</div><div class=""t2"">Familia Brasileira &middot; Teresina-PI &middot; 2024</div></div></body></html>"
-	displayFolder: HTML Visuals
-	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000001
+		displayFolder: HTML Visuals
+		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000001
 
 	measure HTML_Drill_Categoria =
 		VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "Selecione via drill-through")
@@ -304,8 +304,8 @@ table fato_gastos_mensais
 		          & "<div class=""es"">" & _wMun & "% do imposto total</div></div></div>"
 		          & "</body></html>"
 		RETURN _h1 & _h2 & _h3 & _h4 & _h5 & _h6
-	displayFolder: HTML Visuals
-	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000002
+		displayFolder: HTML Visuals
+		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000002
 
 	measure HTML_TT_Categoria =
 		VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "?")
@@ -326,8 +326,8 @@ table fato_gastos_mensais
 		          & "<div class=""pct"">" & _aliq & "%</div><div class=""ps"">do preco final e imposto embutido</div>"
 		          & "</body></html>"
 		RETURN _h1 & _h2
-	displayFolder: HTML Visuals
-	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000003
+		displayFolder: HTML Visuals
+		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000003
 
 	measure HTML_TT_Deficit =
 		VAR _def  = FORMAT(ABS([Resultado_Final]),"#,##0")
@@ -346,8 +346,8 @@ table fato_gastos_mensais
 		           & "<div class=""row""><span class=""rl"">Carga Tributaria</span><span class=""rv"" style=""color:#e74c3c"">" & _carga & "%</span></div>"
 		           & "</body></html>"
 		RETURN _h1 & _h2
-	displayFolder: HTML Visuals
-	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000004
+		displayFolder: HTML Visuals
+		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000004
 
 	measure HTML_TT_Tributacao =
 		VAR _dir  = FORMAT([Tributacao_Direta_Total],"#,##0")
@@ -363,8 +363,8 @@ table fato_gastos_mensais
 		          & "<div class=""tot""><span>Total</span><span style=""color:#e74c3c"">R$ " & _tot & " (" & _pct & "%)</span></div>"
 		          & "</body></html>"
 		RETURN _h1 & _h2
-	displayFolder: HTML Visuals
-	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000005
+		displayFolder: HTML Visuals
+		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000005
 
 	column id
 		dataType: int64
