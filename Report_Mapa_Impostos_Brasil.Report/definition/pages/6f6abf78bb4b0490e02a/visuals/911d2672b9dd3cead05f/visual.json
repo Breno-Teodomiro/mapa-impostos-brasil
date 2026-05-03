@@ -23,11 +23,11 @@
                       "Entity": "fato_gastos_mensais"
                     }
                   },
-                  "Property": "HTML_Navbar_Title"
+                  "Property": "HTML_Drill_Categoria"
                 }
               },
-              "queryRef": "fato_gastos_mensais.HTML_Navbar_Title",
-              "nativeQueryRef": "HTML_Navbar_Title"
+              "queryRef": "fato_gastos_mensais.HTML_Drill_Categoria",
+              "nativeQueryRef": "HTML_Drill_Categoria"
             }
           ]
         }
