@@ -116,7 +116,40 @@ Renda Bruta
 | #3498DB Azul | Gasto / Consumo |
 | #27AE60 Verde | Renda |
 
+## Status das Sprints (2026-05-03)
+
+| Sprint | Status |
+|--------|--------|
+| 0–9 | ✅ |
+| 10 — 04_Social + 05_Simulacao | ✅ |
+| 11 — Polimento UX (navbar, drill, tooltips) | 🔄 |
+| 12 — Publicação | ⬜ |
+
+## Armadilhas TMDL (HTML Content Measures)
+
+### Indentação obrigatória em medidas multi-linha
+```
+\t   measure NomeMedida =        ← 1 tab
+\t\t\t VAR _x = ...             ← 3 tabs (corpo DAX)
+\t\t\t RETURN _x                ← 3 tabs
+\t\t displayFolder: HTML Visuals ← 2 tabs (propriedade filha do measure)
+\t\t lineageTag: xxxx           ← 2 tabs
+```
+⚠️ Se VAR estiver em 2 tabs (igual ao displayFolder), o parser TMDL inclui
+`displayFolder: HTML Visuals` como código DAX → erro de sintaxe na medida.
+
+### Desktop FECHADO ao editar arquivos
+O Power BI Desktop sobrescreve TMDL e visual.json ao salvar.
+**Sempre feche o .pbip antes de editar arquivos diretamente.**
+
+### Outras armadilhas já conhecidas
+- Aspas simples (`'`) banidas de strings HTML no TMDL — usar `"` escapado como `""`
+- `CONCATENATEX`: vírgula é separador de argumento — usar `UNICHAR(44)` para vírgula literal
+- Locale PT-BR: usar `Table.TransformColumnTypes(..., "en-US")` em todas as tabelas numéricas
+- CDN externo trava o HTML Content visual — JS puro sem CDN
+
 ## Evoluções Futuras (V2)
+- Configurar drill-through e tooltips via interface do Desktop
 - Simulação: aluguel vs. financiamento, escola pública vs. privada
 - **Índice de Pressão Financeira Familiar (IPFF)** — indicador proprietário
 - V2 em Python/Streamlit ou React/Node se Power BI não comportar toda a interatividade

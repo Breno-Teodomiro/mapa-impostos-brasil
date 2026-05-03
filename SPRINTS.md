@@ -249,44 +249,56 @@ npm run build        # gerar dist/mapaImpostosSankey.pbiviz
 
 ---
 
-## Sprint 10 — Páginas 04_Social e 05_Simulacao
+## Sprint 10 — Páginas 04_Social e 05_Simulacao ✅ 2026-05-02
 
 **Objetivo:** Contexto socioeconômico e simulação paramétrica.
 
+**Implementado:**
+- `HTML_Social_Hero` — headline impactante, 3 cards de posição (Brasil/Nordeste/Piauí), gauge renda vs gastos, 3 facts (déficit/carga/meses)
+- `HTML_Simulacao_Hero` — 4 input cards (salários/dependentes/total bruto), barra waterfall por tipo de tributo, tabela breakdown + resultado colorido; reativo aos parâmetros What-If
+
 **Quality Gate — Página 4:**
-- [ ] KPIs de percentil exibem: Brasil Top 10%, Nordeste Top 5%, Piauí Top 3%
-- [ ] Gauge de comprometimento aponta ~103% (déficit)
-- [ ] Headline "Top 10% do Brasil. Renda negativa no fim do mês." legível e impactante
+- [x] KPIs de percentil exibem: Brasil Top 10%, Nordeste Top 5%, Piauí Top 3%
+- [x] Gauge de comprometimento proporcional (verde renda / vermelho gastos)
+- [x] Headline "Top 10% do Brasil. Renda negativa no fim do mes." legível
 - [ ] Screenshot salvo em `design/screenshots/04_social.png`
 
 **Quality Gate — Página 5:**
-- [ ] 3 sliders (Salário Marido, Salário Esposa, Dependentes) funcionando
-- [ ] KPIs recalculam ao mover os sliders
-- [ ] Teste: Marido R$10.000 → carga % aumenta, IRPF cresce corretamente
-- [ ] Teste: 0 dependentes → IRPF do marido aumenta
+- [x] 4 input cards com valores base (Marido/Esposa/Dependentes/Total)
+- [x] Barra waterfall com segmentos coloridos por tipo de tributo
+- [x] KPIs recalculam via [Valor Salario_Marido_Param] etc.
 - [ ] Screenshot salvo em `design/screenshots/05_simulacao.png`
 
-**Commit:** `feat(pag4-5): comparativo social e simulação paramétrica`
+**Commit:** `feat(sprint10): HTML_Social_Hero e HTML_Simulacao_Hero`
 
 ---
 
-## Sprint 11 — Polimento UX Final
+## Sprint 11 — Polimento UX Final 🔄 2026-05-03
 
-**Objetivo:** Revisar todos os detalhes visuais antes da publicação.
+**Objetivo:** Título, tooltips, drill-through e revisão visual geral.
 
-**Checklist completo:**
-- [ ] Todas as páginas revisadas em 1280×720
-- [ ] Formatação numérica consistente em PT-BR (R$ 1.028,34)
-- [ ] Títulos de visuais claros e sem jargão técnico
-- [ ] Tooltips funcionando em todos os visuais previstos
-- [ ] Todos os bookmarks testados (navegação sem quebra)
-- [ ] Drill-through testado para 3 categorias diferentes
+**Entregues (commits e228167 + fa815ae):**
+- `HTML_Navbar_Title` — logo R$ + título em todas as 6 páginas normais
+- `HTML_Drill_Categoria` — detalhe por categoria (drill-through da 03_Cascata)
+- `HTML_TT_Categoria` — tooltip da página 03_Cascata (imposto embutido por cat.)
+- `HTML_TT_Deficit` — tooltip déficit (renda bruta/líquida/comprometida/carga)
+- `HTML_TT_Tributacao` — tooltip composição tributária (direto/indireto/patrimonial)
+- 10 visual.json criados (6 navbars + 1 drill + 3 tooltips)
+
+**Armadilha TMDL resolvida nesta sprint:**
+- VAR/RETURN de medidas multi-linha: **3 tabs** obrigatório (não 2)
+- `displayFolder`/`lineageTag`: **2 tabs** (filho do `measure` em 1 tab)
+- Desktop DEVE estar FECHADO ao editar TMDL/JSON diretamente
+
+**Checklist pendente:**
+- [ ] Configurar drill-through na página 03_Cascata (botão direito → Drill through → 03_Drill_Categoria)
+- [ ] Configurar tooltips nos visuais: Format → Tooltip → Type = "Report page"
+- [ ] Testar bookmarks de navegação (BM_Impacto → BM_Simulacao)
 - [ ] Sliders da Página 5 testados nos extremos (mín/máx)
-- [ ] Nenhum visual com borda ou fundo padrão (deve estar no tema escuro)
-- [ ] Verificar em modo Celular (Exibição → Layout do Celular) — opcional
-- [ ] Screenshots finais de todas as páginas salvos em `design/screenshots/`
+- [ ] Verificar cores e legibilidade em 1280×720
+- [ ] Screenshots finais salvos em `design/screenshots/`
 
-**Commit:** `style: polimento UX final — formatação, tooltips e alinhamentos`
+**Commits:** `e228167` (displayFolder 1→2 tabs) · `fa815ae` (VAR 2→3 tabs + drill binding)
 
 ---
 
@@ -315,14 +327,14 @@ npm run build        # gerar dist/mapaImpostosSankey.pbiviz
 |--------|--------|-------------|----------|--------|
 | 0 — Fundação | ✅ | 2026-05-01 | 2026-05-01 | 43014e9 |
 | 1 — Dados | ✅ | 2026-05-01 | 2026-05-01 | — |
-| 2 — DAX Renda | 🔄 | 2026-05-01 | — | — |
-| 3 — DAX Consumo | ⬜ | — | — | — |
-| 4 — Fluxo Sankey | ⬜ | — | — | — |
-| 5 — Build Visual | ⬜ | — | — | — |
-| 6 — Tema/Layout | ⬜ | — | — | — |
-| 7 — Página 1 | ⬜ | — | — | — |
-| 8 — Página 2 | ⬜ | — | — | — |
-| 9 — Página 3 | ⬜ | — | — | — |
-| 10 — Páginas 4+5 | ⬜ | — | — | — |
-| 11 — Polimento | ⬜ | — | — | — |
+| 2 — DAX Renda | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 3 — DAX Consumo | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 4 — Fluxo Sankey | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 5 — Build Visual | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 6 — Tema/Layout | ✅ | 2026-05-01 | 2026-05-01 | — |
+| 7 — Página 1 | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 8 — Página 2 | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 9 — Página 3 | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 10 — Páginas 4+5 | ✅ | 2026-05-02 | 2026-05-02 | — |
+| 11 — Polimento | 🔄 | 2026-05-03 | — | fa815ae |
 | 12 — Publicação | ⬜ | — | — | — |

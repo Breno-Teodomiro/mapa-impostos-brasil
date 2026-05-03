@@ -52,6 +52,11 @@ Todos os visuais são implementados via **HTML Content visual** (marketplace) co
 | Sankey | JS puro + SVG DOM API | `HTML_Sankey_Hero` |
 | Rosca tributação | CSS conic-gradient | `HTML_Tributacao_Hero` |
 | Barras cascata | CONCATENATEX → HTML | `HTML_Cascata_Hero` |
+| Contexto social | Gauge + cards | `HTML_Social_Hero` |
+| Simulação what-if | Waterfall + tabela | `HTML_Simulacao_Hero` |
+| Título/navbar | Logo gradiente | `HTML_Navbar_Title` |
+| Drill categoria | Cards + barras | `HTML_Drill_Categoria` |
+| Tooltips (3) | Cards compactos | `HTML_TT_Categoria/Deficit/Tributacao` |
 
 **Design system:** background `#0f0f1a` · glassmorphism `rgba(255,255,255,0.05)` · Inter/system-ui
 
@@ -103,8 +108,9 @@ Report_Mapa_Impostos_Brasil.pbip
 | 7 | 01_Impacto: KPIs + Sankey + Ticker | ✅ |
 | 8 | 02_Tributacao: rosca + barras | ✅ |
 | 9 | 03_Cascata: imposto embutido | ✅ |
-| 10 | 04_Social + 05_Simulacao | ⬜ |
-| 11–12 | Polimento + publicação | ⬜ |
+| 10 | 04_Social + 05_Simulacao | ✅ |
+| 11 | Navbar, drill-through, tooltips (em andamento) | 🔄 |
+| 12 | Publicação final | ⬜ |
 
 ---
 
