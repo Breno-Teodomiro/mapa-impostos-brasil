@@ -248,123 +248,123 @@ table fato_gastos_mensais
 		displayFolder: HTML Visuals
 		lineageTag: a7b8c9d0-e1f2-3456-abcd-456789012007
 
-		measure HTML_Navbar_Title = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:transparent;height:100vh;display:flex;align-items:center;padding:0 18px;gap:13px;font-family:Inter,system-ui,sans-serif}.ico{width:44px;height:44px;background:linear-gradient(135deg,#e74c3c,#e67e22);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 4px 14px rgba(231,76,60,.35)}.tx{display:flex;flex-direction:column}.t1{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.4px;line-height:1.2}.t2{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-top:2px}</style></head><body><div class=""ico"">R$</div><div class=""tx""><div class=""t1"">Mapa de Impostos</div><div class=""t2"">Familia Brasileira &middot; Teresina-PI &middot; 2024</div></div></body></html>"
-		displayFolder: HTML Visuals
-		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000001
+	measure HTML_Navbar_Title = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:transparent;height:100vh;display:flex;align-items:center;padding:0 18px;gap:13px;font-family:Inter,system-ui,sans-serif}.ico{width:44px;height:44px;background:linear-gradient(135deg,#e74c3c,#e67e22);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;letter-spacing:-.5px;flex-shrink:0;box-shadow:0 4px 14px rgba(231,76,60,.35)}.tx{display:flex;flex-direction:column}.t1{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.4px;line-height:1.2}.t2{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:2px;margin-top:2px}</style></head><body><div class=""ico"">R$</div><div class=""tx""><div class=""t1"">Mapa de Impostos</div><div class=""t2"">Familia Brasileira &middot; Teresina-PI &middot; 2024</div></div></body></html>"
+	displayFolder: HTML Visuals
+	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000001
 
-		measure HTML_Drill_Categoria =
-			VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "Selecione via drill-through")
-			VAR _vtot = CALCULATE(SUM(fato_gastos_mensais[valor_total]))
-			VAR _vimp = CALCULATE(SUM(fato_gastos_mensais[imposto_embutido]))
-			VAR _vcus = CALCULATE(SUM(fato_gastos_mensais[custo_real]))
-			VAR _fed  = CALCULATE(SUM(fato_gastos_mensais[imp_federal]))
-			VAR _est  = CALCULATE(SUM(fato_gastos_mensais[imp_estadual]))
-			VAR _mun  = CALCULATE(SUM(fato_gastos_mensais[imp_municipal]))
-			VAR _aliq = FORMAT(DIVIDE(_vimp,_vtot,0)*100,"0.0")
-			VAR _ftot = FORMAT(_vtot,"#,##0")
-			VAR _fimp = FORMAT(_vimp,"#,##0")
-			VAR _fcus = FORMAT(_vcus,"#,##0")
-			VAR _fFed = FORMAT(_fed,"#,##0")
-			VAR _fEst = FORMAT(_est,"#,##0")
-			VAR _fMun = FORMAT(_mun,"#,##0")
-			VAR _wImp = FORMAT(MIN(DIVIDE(_vimp,_vtot,0)*80,80),"0")
-			VAR _wCus = FORMAT(MIN(DIVIDE(_vcus,_vtot,0)*80,80),"0")
-			VAR _wFed = FORMAT(DIVIDE(_fed,_vimp,0)*100,"0")
-			VAR _wEst = FORMAT(DIVIDE(_est,_vimp,0)*100,"0")
-			VAR _wMun = FORMAT(DIVIDE(_mun,_vimp,0)*100,"0")
-			VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:24px 32px;gap:18px;overflow:hidden}.back{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.hero{flex-shrink:0}.hcat{font-size:32px;font-weight:800;letter-spacing:-.8px;line-height:1}.hsub{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px}.cards{display:flex;gap:12px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 18px}.cl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:5px}.cv{font-size:22px;font-weight:800;letter-spacing:-.5px}.sec{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 18px}.sh{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:10px}.brow{display:flex;align-items:center;gap:10px;margin-bottom:6px}.bl{font-size:10px;color:rgba(255,255,255,.45);width:160px;flex-shrink:0}.bb{flex:1;height:14px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px}.bv{font-size:10px;font-weight:600;color:rgba(255,255,255,.6);width:60px;text-align:right;flex-shrink:0}.esf{display:flex;gap:10px;flex:1;min-height:0}.ec{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;justify-content:center}.et{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.ev{font-size:20px;font-weight:800;letter-spacing:-.4px}.es{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px}</style></head><body>"
-			VAR _h2 = "<div class=""back"">Drill-through &rsaquo; Detalhe por categoria</div>"
-			VAR _h3 = "<div class=""hero""><div class=""hcat"">" & _cat & "</div>"
-			          & "<div class=""hsub"">Detalhamento de impostos embutidos na cadeia produtiva</div></div>"
-			VAR _h4 = "<div class=""cards"">"
-			          & "<div class=""card""><div class=""cl"">Gasto Total</div>"
-			          & "<div class=""cv"" style=""color:#3498db"">R$ " & _ftot & "</div></div>"
-			          & "<div class=""card""><div class=""cl"">Imposto Embutido</div>"
-			          & "<div class=""cv"" style=""color:#e67e22"">R$ " & _fimp & "</div></div>"
-			          & "<div class=""card""><div class=""cl"">Custo Real</div>"
-			          & "<div class=""cv"" style=""color:#27ae60"">R$ " & _fcus & "</div></div>"
-			          & "<div class=""card""><div class=""cl"">Aliquota Indireta</div>"
-			          & "<div class=""cv"" style=""color:#e74c3c"">" & _aliq & "%</div></div></div>"
-			VAR _h5 = "<div class=""sec""><div class=""sh"">Distribuicao das barras</div>"
-			          & "<div class=""brow""><span class=""bl"">Custo Real</span>"
-			          & "<div class=""bb""><div class=""bf"" style=""background:rgba(52,152,219,.6);width:" & _wCus & "%""></div></div>"
-			          & "<span class=""bv"">R$ " & _fcus & "</span></div>"
-			          & "<div class=""brow""><span class=""bl"">Imposto Embutido</span>"
-			          & "<div class=""bb""><div class=""bf"" style=""background:rgba(230,126,34,.75);width:" & _wImp & "%""></div></div>"
-			          & "<span class=""bv"">R$ " & _fimp & "</span></div></div>"
-			VAR _h6 = "<div class=""esf"">"
-			          & "<div class=""ec""><div class=""et"">Federal (PIS/COFINS/IPI)</div>"
-			          & "<div class=""ev"" style=""color:#3498db"">R$ " & _fFed & "</div>"
-			          & "<div class=""es"">" & _wFed & "% do imposto total</div></div>"
-			          & "<div class=""ec""><div class=""et"">Estadual (ICMS)</div>"
-			          & "<div class=""ev"" style=""color:#e67e22"">R$ " & _fEst & "</div>"
-			          & "<div class=""es"">" & _wEst & "% do imposto total</div></div>"
-			          & "<div class=""ec""><div class=""et"">Municipal (ISS)</div>"
-			          & "<div class=""ev"" style=""color:#9b59b6"">R$ " & _fMun & "</div>"
-			          & "<div class=""es"">" & _wMun & "% do imposto total</div></div></div>"
-			          & "</body></html>"
-			RETURN _h1 & _h2 & _h3 & _h4 & _h5 & _h6
-		displayFolder: HTML Visuals
-		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000002
+	measure HTML_Drill_Categoria =
+		VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "Selecione via drill-through")
+		VAR _vtot = CALCULATE(SUM(fato_gastos_mensais[valor_total]))
+		VAR _vimp = CALCULATE(SUM(fato_gastos_mensais[imposto_embutido]))
+		VAR _vcus = CALCULATE(SUM(fato_gastos_mensais[custo_real]))
+		VAR _fed  = CALCULATE(SUM(fato_gastos_mensais[imp_federal]))
+		VAR _est  = CALCULATE(SUM(fato_gastos_mensais[imp_estadual]))
+		VAR _mun  = CALCULATE(SUM(fato_gastos_mensais[imp_municipal]))
+		VAR _aliq = FORMAT(DIVIDE(_vimp,_vtot,0)*100,"0.0")
+		VAR _ftot = FORMAT(_vtot,"#,##0")
+		VAR _fimp = FORMAT(_vimp,"#,##0")
+		VAR _fcus = FORMAT(_vcus,"#,##0")
+		VAR _fFed = FORMAT(_fed,"#,##0")
+		VAR _fEst = FORMAT(_est,"#,##0")
+		VAR _fMun = FORMAT(_mun,"#,##0")
+		VAR _wImp = FORMAT(MIN(DIVIDE(_vimp,_vtot,0)*80,80),"0")
+		VAR _wCus = FORMAT(MIN(DIVIDE(_vcus,_vtot,0)*80,80),"0")
+		VAR _wFed = FORMAT(DIVIDE(_fed,_vimp,0)*100,"0")
+		VAR _wEst = FORMAT(DIVIDE(_est,_vimp,0)*100,"0")
+		VAR _wMun = FORMAT(DIVIDE(_mun,_vimp,0)*100,"0")
+		VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:24px 32px;gap:18px;overflow:hidden}.back{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.hero{flex-shrink:0}.hcat{font-size:32px;font-weight:800;letter-spacing:-.8px;line-height:1}.hsub{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px}.cards{display:flex;gap:12px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 18px}.cl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:5px}.cv{font-size:22px;font-weight:800;letter-spacing:-.5px}.sec{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 18px}.sh{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:10px}.brow{display:flex;align-items:center;gap:10px;margin-bottom:6px}.bl{font-size:10px;color:rgba(255,255,255,.45);width:160px;flex-shrink:0}.bb{flex:1;height:14px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px}.bv{font-size:10px;font-weight:600;color:rgba(255,255,255,.6);width:60px;text-align:right;flex-shrink:0}.esf{display:flex;gap:10px;flex:1;min-height:0}.ec{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;justify-content:center}.et{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.ev{font-size:20px;font-weight:800;letter-spacing:-.4px}.es{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px}</style></head><body>"
+		VAR _h2 = "<div class=""back"">Drill-through &rsaquo; Detalhe por categoria</div>"
+		VAR _h3 = "<div class=""hero""><div class=""hcat"">" & _cat & "</div>"
+		          & "<div class=""hsub"">Detalhamento de impostos embutidos na cadeia produtiva</div></div>"
+		VAR _h4 = "<div class=""cards"">"
+		          & "<div class=""card""><div class=""cl"">Gasto Total</div>"
+		          & "<div class=""cv"" style=""color:#3498db"">R$ " & _ftot & "</div></div>"
+		          & "<div class=""card""><div class=""cl"">Imposto Embutido</div>"
+		          & "<div class=""cv"" style=""color:#e67e22"">R$ " & _fimp & "</div></div>"
+		          & "<div class=""card""><div class=""cl"">Custo Real</div>"
+		          & "<div class=""cv"" style=""color:#27ae60"">R$ " & _fcus & "</div></div>"
+		          & "<div class=""card""><div class=""cl"">Aliquota Indireta</div>"
+		          & "<div class=""cv"" style=""color:#e74c3c"">" & _aliq & "%</div></div></div>"
+		VAR _h5 = "<div class=""sec""><div class=""sh"">Distribuicao das barras</div>"
+		          & "<div class=""brow""><span class=""bl"">Custo Real</span>"
+		          & "<div class=""bb""><div class=""bf"" style=""background:rgba(52,152,219,.6);width:" & _wCus & "%""></div></div>"
+		          & "<span class=""bv"">R$ " & _fcus & "</span></div>"
+		          & "<div class=""brow""><span class=""bl"">Imposto Embutido</span>"
+		          & "<div class=""bb""><div class=""bf"" style=""background:rgba(230,126,34,.75);width:" & _wImp & "%""></div></div>"
+		          & "<span class=""bv"">R$ " & _fimp & "</span></div></div>"
+		VAR _h6 = "<div class=""esf"">"
+		          & "<div class=""ec""><div class=""et"">Federal (PIS/COFINS/IPI)</div>"
+		          & "<div class=""ev"" style=""color:#3498db"">R$ " & _fFed & "</div>"
+		          & "<div class=""es"">" & _wFed & "% do imposto total</div></div>"
+		          & "<div class=""ec""><div class=""et"">Estadual (ICMS)</div>"
+		          & "<div class=""ev"" style=""color:#e67e22"">R$ " & _fEst & "</div>"
+		          & "<div class=""es"">" & _wEst & "% do imposto total</div></div>"
+		          & "<div class=""ec""><div class=""et"">Municipal (ISS)</div>"
+		          & "<div class=""ev"" style=""color:#9b59b6"">R$ " & _fMun & "</div>"
+		          & "<div class=""es"">" & _wMun & "% do imposto total</div></div></div>"
+		          & "</body></html>"
+		RETURN _h1 & _h2 & _h3 & _h4 & _h5 & _h6
+	displayFolder: HTML Visuals
+	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000002
 
-		measure HTML_TT_Categoria =
-			VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "?")
-			VAR _vtot = SUM(fato_gastos_mensais[valor_total])
-			VAR _vimp = SUM(fato_gastos_mensais[imposto_embutido])
-			VAR _vcus = SUM(fato_gastos_mensais[custo_real])
-			VAR _aliq = FORMAT(DIVIDE(_vimp,_vtot,0)*100,"0.0")
-			VAR _ftot = FORMAT(_vtot,"#,##0")
-			VAR _fimp = FORMAT(_vimp,"#,##0")
-			VAR _fcus = FORMAT(_vcus,"#,##0")
-			VAR _w    = FORMAT(MIN(DIVIDE(_vimp,_vtot,0)*100,100),"0")
-			VAR _h1   = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.cat{font-size:14px;font-weight:800;letter-spacing:-.3px;flex-shrink:0}.row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}.rl{color:rgba(255,255,255,.45)}.rv{font-weight:700}.bar{margin-top:4px}.bl{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:3px}.bt{height:10px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px;background:rgba(230,126,34,.75)}.pct{font-size:18px;font-weight:800;color:#e67e22;margin-top:6px}.ps{font-size:9px;color:rgba(255,255,255,.3)}</style></head><body>"
-			VAR _h2   = "<div class=""cat"">" & _cat & "</div>"
-			          & "<div class=""row""><span class=""rl"">Gasto Total</span><span class=""rv"" style=""color:#3498db"">R$ " & _ftot & "</span></div>"
-			          & "<div class=""row""><span class=""rl"">Imposto Embutido</span><span class=""rv"" style=""color:#e67e22"">R$ " & _fimp & "</span></div>"
-			          & "<div class=""row""><span class=""rl"">Custo Real</span><span class=""rv"" style=""color:#27ae60"">R$ " & _fcus & "</span></div>"
-			          & "<div class=""bar""><div class=""bl"">Participacao do imposto</div><div class=""bt""><div class=""bf"" style=""width:" & _w & "%""></div></div></div>"
-			          & "<div class=""pct"">" & _aliq & "%</div><div class=""ps"">do preco final e imposto embutido</div>"
-			          & "</body></html>"
-			RETURN _h1 & _h2
-		displayFolder: HTML Visuals
-		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000003
+	measure HTML_TT_Categoria =
+		VAR _cat  = SELECTEDVALUE(fato_gastos_mensais[categoria], "?")
+		VAR _vtot = SUM(fato_gastos_mensais[valor_total])
+		VAR _vimp = SUM(fato_gastos_mensais[imposto_embutido])
+		VAR _vcus = SUM(fato_gastos_mensais[custo_real])
+		VAR _aliq = FORMAT(DIVIDE(_vimp,_vtot,0)*100,"0.0")
+		VAR _ftot = FORMAT(_vtot,"#,##0")
+		VAR _fimp = FORMAT(_vimp,"#,##0")
+		VAR _fcus = FORMAT(_vcus,"#,##0")
+		VAR _w    = FORMAT(MIN(DIVIDE(_vimp,_vtot,0)*100,100),"0")
+		VAR _h1   = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.cat{font-size:14px;font-weight:800;letter-spacing:-.3px;flex-shrink:0}.row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}.rl{color:rgba(255,255,255,.45)}.rv{font-weight:700}.bar{margin-top:4px}.bl{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:3px}.bt{height:10px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px;background:rgba(230,126,34,.75)}.pct{font-size:18px;font-weight:800;color:#e67e22;margin-top:6px}.ps{font-size:9px;color:rgba(255,255,255,.3)}</style></head><body>"
+		VAR _h2   = "<div class=""cat"">" & _cat & "</div>"
+		          & "<div class=""row""><span class=""rl"">Gasto Total</span><span class=""rv"" style=""color:#3498db"">R$ " & _ftot & "</span></div>"
+		          & "<div class=""row""><span class=""rl"">Imposto Embutido</span><span class=""rv"" style=""color:#e67e22"">R$ " & _fimp & "</span></div>"
+		          & "<div class=""row""><span class=""rl"">Custo Real</span><span class=""rv"" style=""color:#27ae60"">R$ " & _fcus & "</span></div>"
+		          & "<div class=""bar""><div class=""bl"">Participacao do imposto</div><div class=""bt""><div class=""bf"" style=""width:" & _w & "%""></div></div></div>"
+		          & "<div class=""pct"">" & _aliq & "%</div><div class=""ps"">do preco final e imposto embutido</div>"
+		          & "</body></html>"
+		RETURN _h1 & _h2
+	displayFolder: HTML Visuals
+	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000003
 
-		measure HTML_TT_Deficit =
-			VAR _def  = FORMAT(ABS([Resultado_Final]),"#,##0")
-			VAR _carga = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.1")
-			VAR _bruta = FORMAT([Renda_Bruta_Total],"#,##0")
-			VAR _liq   = FORMAT([Renda_Liquida_Total],"#,##0")
-			VAR _gas   = FORMAT([Total_Gastos_Mensais]+[Total_Patrimonial],"#,##0")
-			VAR _h1    = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.tit{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.val{font-size:32px;font-weight:800;color:#e74c3c;letter-spacing:-1px}.sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px}.div{height:1px;background:rgba(255,255,255,.07);margin:4px 0}.row{display:flex;justify-content:space-between;font-size:10px;padding:2px 0}.rl{color:rgba(255,255,255,.4)}.rv{font-weight:600}</style></head><body>"
-			VAR _h2    = "<div class=""tit"">Deficit Mensal</div>"
-			           & "<div class=""val"">- R$ " & _def & "</div>"
-			           & "<div class=""sub"">mesmo no Top 10% da renda nacional</div>"
-			           & "<div class=""div""></div>"
-			           & "<div class=""row""><span class=""rl"">Renda Bruta</span><span class=""rv"">R$ " & _bruta & "</span></div>"
-			           & "<div class=""row""><span class=""rl"">Renda Liquida</span><span class=""rv"">R$ " & _liq & "</span></div>"
-			           & "<div class=""row""><span class=""rl"">Total Comprometido</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _gas & "</span></div>"
-			           & "<div class=""row""><span class=""rl"">Carga Tributaria</span><span class=""rv"" style=""color:#e74c3c"">" & _carga & "%</span></div>"
-			           & "</body></html>"
-			RETURN _h1 & _h2
-		displayFolder: HTML Visuals
-		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000004
+	measure HTML_TT_Deficit =
+		VAR _def  = FORMAT(ABS([Resultado_Final]),"#,##0")
+		VAR _carga = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.1")
+		VAR _bruta = FORMAT([Renda_Bruta_Total],"#,##0")
+		VAR _liq   = FORMAT([Renda_Liquida_Total],"#,##0")
+		VAR _gas   = FORMAT([Total_Gastos_Mensais]+[Total_Patrimonial],"#,##0")
+		VAR _h1    = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.tit{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.val{font-size:32px;font-weight:800;color:#e74c3c;letter-spacing:-1px}.sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px}.div{height:1px;background:rgba(255,255,255,.07);margin:4px 0}.row{display:flex;justify-content:space-between;font-size:10px;padding:2px 0}.rl{color:rgba(255,255,255,.4)}.rv{font-weight:600}</style></head><body>"
+		VAR _h2    = "<div class=""tit"">Deficit Mensal</div>"
+		           & "<div class=""val"">- R$ " & _def & "</div>"
+		           & "<div class=""sub"">mesmo no Top 10% da renda nacional</div>"
+		           & "<div class=""div""></div>"
+		           & "<div class=""row""><span class=""rl"">Renda Bruta</span><span class=""rv"">R$ " & _bruta & "</span></div>"
+		           & "<div class=""row""><span class=""rl"">Renda Liquida</span><span class=""rv"">R$ " & _liq & "</span></div>"
+		           & "<div class=""row""><span class=""rl"">Total Comprometido</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _gas & "</span></div>"
+		           & "<div class=""row""><span class=""rl"">Carga Tributaria</span><span class=""rv"" style=""color:#e74c3c"">" & _carga & "%</span></div>"
+		           & "</body></html>"
+		RETURN _h1 & _h2
+	displayFolder: HTML Visuals
+	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000004
 
-		measure HTML_TT_Tributacao =
-			VAR _dir  = FORMAT([Tributacao_Direta_Total],"#,##0")
-			VAR _ind  = FORMAT([Total_Imposto_Indireto_Embutido],"#,##0")
-			VAR _pat  = FORMAT([Total_Patrimonial],"#,##0")
-			VAR _tot  = FORMAT([Carga_Total_Tributos],"#,##0")
-			VAR _pct  = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.1")
-			VAR _h1   = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.tit{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.row{display:flex;justify-content:space-between;align-items:center;font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)}.rl{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5)}.dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}.rv{font-weight:700}.tot{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-top:6px;padding-top:6px}</style></head><body>"
-			VAR _h2   = "<div class=""tit"">Composicao Tributaria</div>"
-			          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#e74c3c""></div>Direta (INSS+IRPF)</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _dir & "</span></div>"
-			          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#e67e22""></div>Indireta (embutida)</span><span class=""rv"" style=""color:#e67e22"">R$ " & _ind & "</span></div>"
-			          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#9b59b6""></div>Patrimonial</span><span class=""rv"" style=""color:#9b59b6"">R$ " & _pat & "</span></div>"
-			          & "<div class=""tot""><span>Total</span><span style=""color:#e74c3c"">R$ " & _tot & " (" & _pct & "%)</span></div>"
-			          & "</body></html>"
-			RETURN _h1 & _h2
-		displayFolder: HTML Visuals
-		lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000005
+	measure HTML_TT_Tributacao =
+		VAR _dir  = FORMAT([Tributacao_Direta_Total],"#,##0")
+		VAR _ind  = FORMAT([Total_Imposto_Indireto_Embutido],"#,##0")
+		VAR _pat  = FORMAT([Total_Patrimonial],"#,##0")
+		VAR _tot  = FORMAT([Carga_Total_Tributos],"#,##0")
+		VAR _pct  = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.1")
+		VAR _h1   = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#161625;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;gap:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:8px}.tit{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.row{display:flex;justify-content:space-between;align-items:center;font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)}.rl{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.5)}.dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}.rv{font-weight:700}.tot{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-top:6px;padding-top:6px}</style></head><body>"
+		VAR _h2   = "<div class=""tit"">Composicao Tributaria</div>"
+		          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#e74c3c""></div>Direta (INSS+IRPF)</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _dir & "</span></div>"
+		          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#e67e22""></div>Indireta (embutida)</span><span class=""rv"" style=""color:#e67e22"">R$ " & _ind & "</span></div>"
+		          & "<div class=""row""><span class=""rl""><div class=""dot"" style=""background:#9b59b6""></div>Patrimonial</span><span class=""rv"" style=""color:#9b59b6"">R$ " & _pat & "</span></div>"
+		          & "<div class=""tot""><span>Total</span><span style=""color:#e74c3c"">R$ " & _tot & " (" & _pct & "%)</span></div>"
+		          & "</body></html>"
+		RETURN _h1 & _h2
+	displayFolder: HTML Visuals
+	lineageTag: 1a2b3c4d-5e6f-7890-abcd-000000000005
 
 	column id
 		dataType: int64
