@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "c87e0e17e5133e0eb4b6",
+  "name": "77790c7000d0d80a4ac5",
   "position": {
-    "x": 573.83511954168466,
-    "y": 386.39701471793063,
-    "z": 2000,
+    "x": 593.99259985664526,
+    "y": 445.86158164706438,
+    "z": 4,
     "height": 77.817614964925951,
     "width": 280.34294621979734,
-    "tabOrder": 2
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "slicer",
@@ -385,23 +385,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "ba96877534e2926ac0a0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Dependentes_Param"
-              }
-            },
-            "Property": "Dependentes_Param"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

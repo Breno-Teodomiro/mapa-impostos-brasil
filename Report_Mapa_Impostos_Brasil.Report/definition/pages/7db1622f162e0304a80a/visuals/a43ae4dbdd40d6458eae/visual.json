@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "a43ae4dbdd40d6458eae",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 1000,
+    "height": 240,
+    "width": 320,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_gastos_mensais"
+                    }
+                  },
+                  "Property": "HTML_TT_Deficit"
+                }
+              },
+              "queryRef": "fato_gastos_mensais.HTML_TT_Deficit",
+              "nativeQueryRef": "HTML_TT_Deficit"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
