@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "5c3d3a109e90104993cb",
+  "position": {
+    "x": 0,
+    "y": 81.076801266825015,
+    "z": 1,
+    "height": 638.479809976247,
+    "width": 1280,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_gastos_mensais"
+                    }
+                  },
+                  "Property": "HTML_Simulacao_Hero"
+                }
+              },
+              "queryRef": "fato_gastos_mensais.HTML_Simulacao_Hero",
+              "nativeQueryRef": "HTML_Simulacao_Hero"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
