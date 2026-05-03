@@ -190,6 +190,66 @@ table fato_gastos_mensais
 		displayFolder: HTML Visuals
 		lineageTag: e5f6a7b8-c9d0-1234-efab-234567890005
 
+
+	measure HTML_Social_Hero =
+				VAR _pBr  = [Percentil_Brasil_Estimado]
+				VAR _pNe  = [Percentil_Nordeste_Estimado]
+				VAR _pPi  = SWITCH(TRUE(),[Renda_Bruta_Total]>10000,"Top 1%",[Renda_Bruta_Total]>5000,"Top 3%",[Renda_Bruta_Total]>3000,"Top 10%","Abaixo da mediana")
+				VAR _ren  = [Renda_Liquida_Total]
+				VAR _gasto = [Total_Gastos_Mensais] + [Total_Patrimonial]
+				VAR _fRen = FORMAT(_ren,"#,##0")
+				VAR _fGas = FORMAT(_gasto,"#,##0")
+				VAR _fDef = FORMAT(ABS([Resultado_Final]),"#,##0")
+				VAR _carga = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.0")
+				VAR _pct  = FORMAT([Comprometimento_Renda_Liquida_Pct],"0")
+				VAR _gasW = FORMAT(MIN(DIVIDE(_gasto,_ren,0)*70,95),"0")
+				VAR _meses = FORMAT(DIVIDE([Carga_Total_Tributos],[Renda_Bruta_Total],0)*12,"0.1")
+				VAR _hs = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:16px;gap:11px;overflow:hidden}.hl{font-size:17px;font-weight:800;letter-spacing:-.4px;line-height:1.25;flex-shrink:0}.hl span{color:#e74c3c}.top{display:flex;gap:10px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px}.cl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:5px}.cv{font-size:20px;font-weight:800;letter-spacing:-.5px}.cs{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px}.gw{flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:12px 18px}.gt{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:8px}.gr{display:flex;align-items:center;gap:10px;margin-bottom:5px}.gl{font-size:10px;color:rgba(255,255,255,.45);width:110px;text-align:right;flex-shrink:0}.gb{height:18px;border-radius:3px}.gv{font-size:10px;font-weight:600;color:rgba(255,255,255,.65);margin-left:8px;flex-shrink:0}.facts{display:flex;gap:10px;flex:1;min-height:0}.fc{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;justify-content:center}.ft{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.fv{font-size:22px;font-weight:800;letter-spacing:-.5px}.fs{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px}</style></head><body><div class=""hl"">Top 10% do Brasil. <span>Renda negativa no fim do mes.</span></div><div class=""top""><div class=""card""><div class=""cl"">Posicao Brasil</div><div class=""cv"" style=""color:#3498db"">" & _pBr & "</div><div class=""cs"">distribuicao de renda nacional</div></div><div class=""card""><div class=""cl"">Posicao Nordeste</div><div class=""cv"" style=""color:#27ae60"">" & _pNe & "</div><div class=""cs"">distribuicao regional</div></div><div class=""card""><div class=""cl"">Posicao Piaui</div><div class=""cv"" style=""color:#9b59b6"">" & _pPi & "</div><div class=""cs"">distribuicao estadual estimada</div></div></div>"
+				VAR _hg = "<div class=""gw""><div class=""gt"">Renda liquida vs Comprometimento mensal</div><div class=""gr""><span class=""gl"">Renda Liquida</span><div class=""gb"" style=""width:70%;background:rgba(39,174,96,.55)""></div><span class=""gv"">R$ " & _fRen & "</span></div><div class=""gr""><span class=""gl"">Total Gasto+Impostos</span><div class=""gb"" style=""width:" & _gasW & "%;background:rgba(231,76,60,.65)""></div><span class=""gv"">R$ " & _fGas & " (" & _pct & "%)</span></div></div>"
+				VAR _hf = "<div class=""facts""><div class=""fc""><div class=""ft"">Deficit mensal</div><div class=""fv"" style=""color:#e74c3c"">-R$ " & _fDef & "</div><div class=""fs"">mesmo no Top 10% da renda</div></div><div class=""fc""><div class=""ft"">Carga tributaria efetiva</div><div class=""fv"" style=""color:#e67e22"">" & _carga & "%</div><div class=""fs"">da renda bruta familiar</div></div><div class=""fc""><div class=""ft"">Meses/ano so pagando imposto</div><div class=""fv"" style=""color:#9b59b6"">" & _meses & " meses</div><div class=""fs"">de trabalho destinado ao Estado</div></div></div></body></html>"
+				RETURN _hs & _hg & _hf
+		displayFolder: HTML Visuals
+		lineageTag: f6a7b8c9-d0e1-2345-fabc-345678901006
+
+
+	measure HTML_Simulacao_Hero =
+				VAR _mar   = [Valor Salario_Marido_Param]
+				VAR _esp   = [Valor Salario_Esposa_Param]
+				VAR _dep   = FORMAT([Valor Dependentes_Param],"0")
+				VAR _bruta = [Renda_Bruta_Total]
+				VAR _inss  = [INSS_Total_Familia]
+				VAR _irpf  = [IRPF_Total_Familia]
+				VAR _liq   = [Renda_Liquida_Total]
+				VAR _ind   = [Total_Imposto_Indireto_Embutido]
+				VAR _pat   = [Total_Patrimonial]
+				VAR _gas   = [Total_Gastos_Mensais] + _pat
+				VAR _carga = [Carga_Total_Tributos]
+				VAR _res   = [Resultado_Final]
+				VAR _pct   = FORMAT([Carga_Efetiva_Sobre_Renda_Bruta_Pct],"0.0")
+				VAR _fMar  = FORMAT(_mar,"#,##0")
+				VAR _fEsp  = FORMAT(_esp,"#,##0")
+				VAR _fBruta= FORMAT(_bruta,"#,##0")
+				VAR _fInss = FORMAT(_inss,"#,##0")
+				VAR _fIrpf = FORMAT(_irpf,"#,##0")
+				VAR _fLiq  = FORMAT(_liq,"#,##0")
+				VAR _fInd  = FORMAT(_ind,"#,##0")
+				VAR _fGas  = FORMAT(_gas,"#,##0")
+				VAR _fCarga= FORMAT(_carga,"#,##0")
+				VAR _fRes  = FORMAT(ABS(_res),"#,##0")
+				VAR _cor   = IF(_res>=0,"#27ae60","#e74c3c")
+				VAR _sinal = IF(_res>=0,"+ ","- ")
+				VAR _wInss = FORMAT(DIVIDE(_inss,_bruta,0)*100,"0")
+				VAR _wIrpf = FORMAT(DIVIDE(_irpf,_bruta,0)*100,"0")
+				VAR _wInd  = FORMAT(DIVIDE(_ind,_bruta,0)*100,"0")
+				VAR _wPat  = FORMAT(DIVIDE(_pat,_bruta,0)*100,"0")
+				VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:16px;gap:10px;overflow:hidden}.title{font-size:13px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:2px;flex-shrink:0}.top{display:flex;gap:10px;flex-shrink:0}.card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:11px 14px}.cl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:4px}.cv{font-size:20px;font-weight:800;letter-spacing:-.5px}.cs{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px}.sec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:12px 16px;flex-shrink:0}.sl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:8px}.wf{display:flex;height:28px;border-radius:6px;overflow:hidden;gap:1px}.ws{height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,.85);overflow:hidden;white-space:nowrap}.bot{display:flex;gap:10px;flex:1;min-height:0}.bc{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:5px;overflow:hidden}.bh{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:2px}.row{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.05)}.rl{color:rgba(255,255,255,.5)}.rv{font-weight:700}.total{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-top:4px;padding-top:6px}</style></head><body><div class=""title"">Simulador de Carga Tributaria</div><div class=""top""><div class=""card""><div class=""cl"">Salario Marido</div><div class=""cv"" style=""color:#3498db"">R$ " & _fMar & "</div></div><div class=""card""><div class=""cl"">Salario Esposa</div><div class=""cv"" style=""color:#27ae60"">R$ " & _fEsp & "</div></div><div class=""card""><div class=""cl"">Dependentes</div><div class=""cv"" style=""color:#9b59b6"">" & _dep & "</div></div><div class=""card""><div class=""cl"">Renda Bruta Total</div><div class=""cv"" style=""color:#f39c12"">R$ " & _fBruta & "</div><div class=""cs"">familia / mes</div></div></div><div class=""sec""><div class=""sl"">Composicao da renda bruta</div><div class=""wf""><div class=""ws"" style=""background:rgba(231,76,60,.7);width:"
+				VAR _h2 = "%"">INSS</div><div class=""ws"" style=""background:rgba(192,57,43,.7);width:" & _wInss & "%"">IRPF</div><div class=""ws"" style=""background:rgba(230,126,34,.55);width:" & _wIrpf & "%"">Indir.</div><div class=""ws"" style=""background:rgba(142,68,173,.55);width:" & _wInd & "%"">Pat.</div><div class=""ws"" style=""background:rgba(52,152,219,.5);flex:1"">Gasto Real</div></div></div><div class=""bot""><div class=""bc""><div class=""bh"">Tributacao Direta</div><div class=""row""><span class=""rl"">INSS Total</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _wPat & "%"">Pat.</div><div class=""ws"" style=""background:rgba(52,152,219,.5);flex:1"">Gasto Real</div></div></div><div class=""bot""><div class=""bc""><div class=""bh"">Tributacao Direta</div><div class=""row""><span class=""rl"">INSS Total</span><span class=""rv"" style=""color:#e74c3c"">R$ "
+				VAR _h3 = "</span></div><div class=""row""><span class=""rl"">IRPF Total</span><span class=""rv"" style=""color:#e74c3c"">R$ " & _fInss & "</span></div><div class=""row""><span class=""rl"">Renda Liquida</span><span class=""rv"" style=""color:#27ae60"">R$ " & _fIrpf & "</span></div><div class=""total""><span>Carga Efetiva</span><span style=""color:#e74c3c"">" & _fLiq & "%</span></div></div><div class=""bc""><div class=""bh"">Resultado Final</div><div class=""row""><span class=""rl"">Total Impostos</span><span class=""rv"" style=""color:#e67e22"">R$ " & _pct & "</span></div><div class=""row""><span class=""rl"">Total Gastos</span><span class=""rv"">R$ "
+				VAR _h4 = "</span></div><div class=""row""><span class=""rl"">Total Gastos</span><span class=""rv"">R$ " & _fCarga & "</span></div><div class=""row""><span class=""rl"">Impostos Indir.</span><span class=""rv"" style=""color:#e67e22"">R$ " & _fGas & "</span></div><div class=""total""><span>Resultado</span><span style=""color:" & _fInd & """>R$ " & _cor & "</span></div></div></div></body></html>" & _sinal & _fRes & "</span></div></div></div></body></html>"
+				RETURN _h1 & _h2 & _h3 & _h4
+		displayFolder: HTML Visuals
+		lineageTag: a7b8c9d0-e1f2-3456-abcd-456789012007
+
 	column id
 		dataType: int64
 		formatString: 0
