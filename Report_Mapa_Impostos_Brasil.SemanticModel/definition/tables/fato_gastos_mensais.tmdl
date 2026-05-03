@@ -160,34 +160,33 @@ table fato_gastos_mensais
 		displayFolder: HTML Visuals
 		lineageTag: d4e5f6a7-b8c9-0123-defa-123456789004
 
-
 	measure HTML_Cascata_Hero =
-				VAR _maxV = MAXX(fato_gastos_mensais, fato_gastos_mensais[valor_total])
-				VAR _rows =
-				    CONCATENATEX(
-				        TOPN(25, fato_gastos_mensais, fato_gastos_mensais[valor_total], DESC),
-				        "<div class=""br"">"
-				        & "<div class=""bn"">" & fato_gastos_mensais[categoria] & "</div>"
-				        & "<div class=""bb"">"
-				        & "<div class=""bc"" style=""width:"
-				            & FORMAT(DIVIDE(fato_gastos_mensais[custo_real], _maxV, 0) * 62, "0")
-				            & "%""></div>"
-				        & "<div class=""bi"" style=""width:"
-				            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], _maxV, 0) * 62, "0")
-				            & "%""></div>"
-				        & "</div>"
-				        & "<div class=""bpct"">"
-				            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], fato_gastos_mensais[valor_total], 0) * 100, "0")
-				            & "%</div>"
-				        & "<div class=""bval"">R$ "
-				            & FORMAT(fato_gastos_mensais[valor_total], "#,##0")
-				            & "</div>"
-				        & "</div>",
-				        ""
-				    )
-				VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;overflow:hidden}.hd{flex-shrink:0;margin-bottom:8px}.ht{font-size:13px;font-weight:700;letter-spacing:-.3px}.hs{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}.leg{display:flex;gap:14px;margin-top:6px;font-size:10px;color:rgba(255,255,255,.45)}.li{display:flex;align-items:center;gap:5px}.ld{width:10px;height:10px;border-radius:2px}.rows{flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden}.br{display:flex;align-items:center;gap:8px;padding:1px 0}.bn{width:128px;flex-shrink:0;font-size:10px;color:rgba(255,255,255,.62);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bb{flex:1;display:flex;height:16px;gap:1px;align-items:stretch}.bc{background:rgba(52,152,219,.5);border-radius:3px 0 0 3px;height:100%}.bi{background:rgba(230,126,34,.78);border-radius:0 3px 3px 0;height:100%}.bpct{width:34px;font-size:10px;font-weight:700;color:#e67e22;flex-shrink:0;text-align:right}.bval{width:56px;font-size:9px;color:rgba(255,255,255,.3);flex-shrink:0;text-align:right}</style></head><body><div class=""hd""><div class=""ht"">Imposto Embutido por Categoria de Gasto</div><div class=""hs"">Tributos incorporados na cadeia produtiva (industria - distribuidor - varejo - consumidor)</div><div class=""leg""><div class=""li""><div class=""ld"" style=""background:rgba(52,152,219,.5)""></div>Custo real</div><div class=""li""><div class=""ld"" style=""background:rgba(230,126,34,.78)""></div>Imposto embutido</div></div></div><div class=""rows"">"
-				VAR _h2 = "</div></body></html>"
-				RETURN _h1 & _rows & _h2
+			VAR _maxV = MAXX(fato_gastos_mensais, fato_gastos_mensais[valor_total])
+			VAR _rows =
+			    CONCATENATEX(
+			        TOPN(25, fato_gastos_mensais, fato_gastos_mensais[valor_total], DESC),
+			        "<div class=""br"">"
+			        & "<div class=""bn"">" & fato_gastos_mensais[categoria] & "</div>"
+			        & "<div class=""bb"">"
+			        & "<div class=""bc"" style=""width:"
+			            & FORMAT(DIVIDE(fato_gastos_mensais[custo_real], _maxV, 0) * 62, "0")
+			            & "%""></div>"
+			        & "<div class=""bi"" style=""width:"
+			            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], _maxV, 0) * 62, "0")
+			            & "%""></div>"
+			        & "</div>"
+			        & "<div class=""bpct"">"
+			            & FORMAT(DIVIDE(fato_gastos_mensais[imposto_embutido], fato_gastos_mensais[valor_total], 0) * 100, "0")
+			            & "%</div>"
+			        & "<div class=""bval"">R$ "
+			            & FORMAT(fato_gastos_mensais[valor_total], "#,##0")
+			            & "</div>"
+			        & "</div>",
+			        ""
+			    )
+			VAR _h1 = "<!DOCTYPE html><html><head><meta charset=""UTF-8""><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0f1a;font-family:Inter,system-ui,sans-serif;color:#fff;height:100vh;display:flex;flex-direction:column;padding:14px;overflow:hidden}.hd{flex-shrink:0;margin-bottom:8px}.ht{font-size:13px;font-weight:700;letter-spacing:-.3px}.hs{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}.leg{display:flex;gap:14px;margin-top:6px;font-size:10px;color:rgba(255,255,255,.45)}.li{display:flex;align-items:center;gap:5px}.ld{width:10px;height:10px;border-radius:2px}.rows{flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden}.br{display:flex;align-items:center;gap:8px;padding:1px 0}.bn{width:128px;flex-shrink:0;font-size:10px;color:rgba(255,255,255,.62);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bb{flex:1;display:flex;height:16px;gap:1px;align-items:stretch}.bc{background:rgba(52,152,219,.5);border-radius:3px 0 0 3px;height:100%}.bi{background:rgba(230,126,34,.78);border-radius:0 3px 3px 0;height:100%}.bpct{width:34px;font-size:10px;font-weight:700;color:#e67e22;flex-shrink:0;text-align:right}.bval{width:56px;font-size:9px;color:rgba(255,255,255,.3);flex-shrink:0;text-align:right}</style></head><body><div class=""hd""><div class=""ht"">Imposto Embutido por Categoria de Gasto</div><div class=""hs"">Tributos incorporados na cadeia produtiva (industria - distribuidor - varejo - consumidor)</div><div class=""leg""><div class=""li""><div class=""ld"" style=""background:rgba(52,152,219,.5)""></div>Custo real</div><div class=""li""><div class=""ld"" style=""background:rgba(230,126,34,.78)""></div>Imposto embutido</div></div></div><div class=""rows"">"
+			VAR _h2 = "</div></body></html>"
+			RETURN _h1 & _rows & _h2
 		displayFolder: HTML Visuals
 		lineageTag: e5f6a7b8-c9d0-1234-efab-234567890005
 

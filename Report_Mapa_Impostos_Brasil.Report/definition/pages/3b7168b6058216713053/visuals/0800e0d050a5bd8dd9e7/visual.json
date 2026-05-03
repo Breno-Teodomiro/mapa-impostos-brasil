@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
-  "name": "459089e6281784e10ac5",
+  "name": "0800e0d050a5bd8dd9e7",
   "position": {
     "x": 0,
-    "y": 328.15988973121983,
-    "z": 6000,
-    "height": 392.55685733976571,
-    "width": 1280,
-    "tabOrder": 5007
+    "y": 80.798004987531172,
+    "z": 1,
+    "height": 639.20199501246884,
+    "width": 1280.1995012468828,
+    "tabOrder": 6
   },
   "visual": {
     "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6855",
@@ -23,17 +23,14 @@
                       "Entity": "fato_gastos_mensais"
                     }
                   },
-                  "Property": "HTML_Sankey_Hero"
+                  "Property": "HTML_Tributacao_Hero"
                 }
               },
-              "queryRef": "fato_gastos_mensais.HTML_Sankey_Hero",
-              "nativeQueryRef": "HTML_Sankey_Hero"
+              "queryRef": "fato_gastos_mensais.HTML_Tributacao_Hero",
+              "nativeQueryRef": "HTML_Tributacao_Hero"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "isDefaultSort": true
       }
     },
     "drillFilterOtherVisuals": true
